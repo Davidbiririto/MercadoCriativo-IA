@@ -1,10 +1,16 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MarketCriativo IA</title>
+
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -15,33 +21,52 @@
     header {
       background: linear-gradient(135deg, #0f62fe, #0043ce);
       color: white;
-      padding: 50px 20px;
+      padding: 60px 20px;
       text-align: center;
     }
 
     header h1 {
-      font-size: 36px;
-      margin-bottom: 10px;
+      font-size: 42px;
+      margin-bottom: 12px;
     }
 
     header p {
-      font-size: 18px;
-      max-width: 700px;
+      font-size: 19px;
+      max-width: 760px;
       margin: auto;
+      line-height: 1.5;
+    }
+
+    .cta-main {
+      margin-top: 25px;
+      background: white;
+      color: #0f62fe;
+      border: none;
+      padding: 15px 28px;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
     }
 
     .container {
-      max-width: 1100px;
-      margin: -30px auto 40px;
+      max-width: 1150px;
+      margin: -35px auto 50px;
       padding: 20px;
     }
 
     .card {
       background: white;
-      border-radius: 18px;
+      border-radius: 20px;
       padding: 25px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.08);
       margin-bottom: 25px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
     }
 
     label {
@@ -60,14 +85,14 @@
     }
 
     button {
-      margin-top: 20px;
+      margin-top: 18px;
       width: 100%;
       padding: 15px;
       border: none;
       border-radius: 12px;
       background: #0f62fe;
       color: white;
-      font-size: 17px;
+      font-size: 16px;
       font-weight: bold;
       cursor: pointer;
     }
@@ -76,10 +101,9 @@
       background: #0043ce;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 25px;
+    .secondary-btn {
+      background: #e5e7eb;
+      color: #111827;
     }
 
     .result-box {
@@ -88,13 +112,21 @@
       padding: 15px;
       border-radius: 10px;
       margin-top: 15px;
+      white-space: pre-line;
+    }
+
+    .copy-btn {
+      padding: 9px;
+      font-size: 13px;
+      margin-top: 8px;
+      background: #111827;
     }
 
     .plans {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
-      margin-top: 30px;
+      margin-top: 20px;
     }
 
     .plan {
@@ -103,6 +135,12 @@
       border-radius: 18px;
       text-align: center;
       box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+      border: 2px solid transparent;
+    }
+
+    .plan.featured {
+      border-color: #0f62fe;
+      transform: scale(1.03);
     }
 
     .price {
@@ -111,32 +149,156 @@
       font-weight: bold;
     }
 
-    @media (max-width: 800px) {
+    .badge {
+      display: inline-block;
+      background: #dbeafe;
+      color: #0f62fe;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .preview-img {
+      width: 100%;
+      max-height: 240px;
+      object-fit: contain;
+      background: #f3f4f6;
+      border-radius: 12px;
+      margin-top: 15px;
+      display: none;
+    }
+
+    .status {
+      background: #ecfdf5;
+      color: #047857;
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    .warning {
+      background: #fff7ed;
+      color: #c2410c;
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    .history-item {
+      background: #f9fafb;
+      padding: 15px;
+      border-radius: 12px;
+      margin-top: 12px;
+      border-left: 4px solid #0f62fe;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #6b7280;
+    }
+
+    @media (max-width: 850px) {
       .grid, .plans {
         grid-template-columns: 1fr;
       }
 
       header h1 {
-        font-size: 28px;
+        font-size: 30px;
+      }
+
+      .container {
+        margin-top: -20px;
+      }
+
+      .plan.featured {
+        transform: none;
       }
     }
   </style>
 </head>
+
 <body>
 
 <header>
   <h1>MarketCriativo IA</h1>
-  <p>Crie anúncios profissionais para Shopee, Mercado Livre e Amazon em poucos segundos com ajuda da inteligência artificial.</p>
+  <p>Crie anúncios profissionais para Shopee, Mercado Livre e Amazon em poucos segundos. Envie a foto do produto, informe o nome e receba título, descrição, CTA e criativos prontos para vender mais.</p>
+  <button class="cta-main" onclick="document.getElementById('app').scrollIntoView({behavior:'smooth'})">
+    Gerar meu primeiro anúncio grátis
+  </button>
 </header>
 
 <div class="container">
 
-  <div class="grid">
+  <div class="card">
+    <span class="badge">MicroSaaS para vendedores online</span>
+    <h2>Como funciona</h2>
+    <p><strong>1.</strong> Envie a imagem do produto.</p>
+    <p><strong>2.</strong> Preencha as informações principais.</p>
+    <p><strong>3.</strong> Receba um anúncio completo com título, descrição, bullet points, CTA, palavras-chave e ideia de imagem promocional.</p>
+  </div>
+
+  <div class="grid" id="app">
+
     <div class="card">
-      <h2>Gerar anúncio</h2>
+      <h2>Acesso do usuário</h2>
+
+      <div id="loginStatus" class="warning">Você ainda não está logado.</div>
+
+      <label>Nome</label>
+      <input type="text" id="userName" placeholder="Seu nome">
+
+      <label>E-mail</label>
+      <input type="email" id="userEmail" placeholder="seuemail@email.com">
+
+      <button onclick="loginUser()">Criar conta / Entrar</button>
+      <button class="secondary-btn" onclick="logoutUser()">Sair</button>
+
+      <p><strong>Plano atual:</strong> <span id="currentPlan">Grátis</span></p>
+      <p><strong>Gerações usadas:</strong> <span id="usageCount">0</span>/3</p>
+    </div>
+
+    <div class="card">
+      <h2>Planos</h2>
+
+      <div class="plans">
+        <div class="plan">
+          <h3>Grátis</h3>
+          <p class="price">R$0</p>
+          <p>3 anúncios para testar</p>
+          <button onclick="setPlan('Grátis')">Usar grátis</button>
+        </div>
+
+        <div class="plan featured">
+          <h3>Básico</h3>
+          <p class="price">R$19,90/mês</p>
+          <p>50 anúncios por mês</p>
+          <button onclick="setPlan('Básico')">Fazer upgrade</button>
+        </div>
+
+        <div class="plan">
+          <h3>Pro</h3>
+          <p class="price">R$99,90/mês</p>
+          <p>Anúncios ilimitados + histórico completo</p>
+          <button onclick="setPlan('Pro')">Assinar Pro</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <h2>Gerar anúncio com IA</h2>
 
       <label>Foto do produto</label>
-      <input type="file" accept="image/*">
+      <input type="file" id="productImage" accept="image/*" onchange="previewImage(event)">
+      <img id="preview" class="preview-img">
 
       <label>Nome do produto</label>
       <input type="text" id="produto" placeholder="Ex: Cabo USB-C Turbo 2 Metros">
@@ -151,8 +313,26 @@
       <label>Categoria</label>
       <input type="text" id="categoria" placeholder="Ex: Eletrônicos, Moda, Casa">
 
-      <label>Informações extras</label>
-      <textarea id="extras" rows="4" placeholder="Marca, cor, tamanho, quantidade, material, diferencial..."></textarea>
+      <label>Marca</label>
+      <input type="text" id="marca" placeholder="Ex: Genérico, Lehmox, Sem marca">
+
+      <label>Cor</label>
+      <input type="text" id="cor" placeholder="Ex: Branco, Preto, Azul">
+
+      <label>Tamanho / Medida</label>
+      <input type="text" id="tamanho" placeholder="Ex: 2 metros, P, M, G">
+
+      <label>Quantidade</label>
+      <input type="text" id="quantidade" placeholder="Ex: 1 unidade, Kit com 3, Pacote com 10">
+
+      <label>Material</label>
+      <input type="text" id="material" placeholder="Ex: Silicone, plástico, algodão">
+
+      <label>Público-alvo</label>
+      <input type="text" id="publico" placeholder="Ex: vendedores, mães, gamers, lojistas">
+
+      <label>Diferenciais do produto</label>
+      <textarea id="extras" rows="4" placeholder="Ex: envio rápido, resistente, promoção, garantia, ideal para presente..."></textarea>
 
       <button onclick="gerarAnuncio()">Gerar anúncio com IA</button>
     </div>
@@ -163,78 +343,255 @@
       <div class="result-box">
         <strong>Título otimizado:</strong>
         <p id="titulo">Seu título aparecerá aqui.</p>
+        <button class="copy-btn" onclick="copiarTexto('titulo')">Copiar título</button>
       </div>
 
       <div class="result-box">
-        <strong>Descrição:</strong>
+        <strong>Descrição profissional:</strong>
         <p id="descricao">A descrição aparecerá aqui.</p>
+        <button class="copy-btn" onclick="copiarTexto('descricao')">Copiar descrição</button>
       </div>
 
       <div class="result-box">
-        <strong>Bullet points:</strong>
+        <strong>5 Bullet points:</strong>
         <p id="bullets">Os pontos de venda aparecerão aqui.</p>
+        <button class="copy-btn" onclick="copiarTexto('bullets')">Copiar bullets</button>
       </div>
 
       <div class="result-box">
-        <strong>CTA:</strong>
+        <strong>CTA de venda:</strong>
         <p id="cta">O CTA aparecerá aqui.</p>
+        <button class="copy-btn" onclick="copiarTexto('cta')">Copiar CTA</button>
+      </div>
+
+      <div class="result-box">
+        <strong>Palavras-chave:</strong>
+        <p id="keywords">As palavras-chave aparecerão aqui.</p>
+        <button class="copy-btn" onclick="copiarTexto('keywords')">Copiar palavras-chave</button>
       </div>
 
       <div class="result-box">
         <strong>Ideia de imagem promocional:</strong>
         <p id="imagem">A sugestão de criativo aparecerá aqui.</p>
+        <button class="copy-btn" onclick="copiarTexto('imagem')">Copiar ideia</button>
+      </div>
+
+      <div class="result-box">
+        <strong>Sugestão de preço psicológico:</strong>
+        <p id="preco">A sugestão de preço aparecerá aqui.</p>
+        <button class="copy-btn" onclick="copiarTexto('preco')">Copiar preço</button>
       </div>
     </div>
+
   </div>
 
   <div class="card">
-    <h2>Planos</h2>
-    <div class="plans">
-      <div class="plan">
-        <h3>Grátis</h3>
-        <p class="price">R$0</p>
-        <p>3 anúncios para testar</p>
-      </div>
-
-      <div class="plan">
-        <h3>Básico</h3>
-        <p class="price">R$19,90/mês</p>
-        <p>50 anúncios por mês</p>
-      </div>
-
-      <div class="plan">
-        <h3>Pro</h3>
-        <p class="price">R$49,90/mês</p>
-        <p>Anúncios ilimitados + histórico</p>
-      </div>
-    </div>
+    <h2>Painel do usuário</h2>
+    <p>Aqui ficam salvos os anúncios gerados durante o uso do navegador.</p>
+    <div id="history"></div>
+    <button class="secondary-btn" onclick="limparHistorico()">Limpar histórico</button>
   </div>
 
 </div>
 
+<footer>
+  MarketCriativo IA © 2026 - MVP para validação de MicroSaaS
+</footer>
+
 <script>
+  let user = JSON.parse(localStorage.getItem("marketUser")) || null;
+  let history = JSON.parse(localStorage.getItem("marketHistory")) || [];
+
+  function atualizarInterface() {
+    const status = document.getElementById("loginStatus");
+    const plan = document.getElementById("currentPlan");
+    const usage = document.getElementById("usageCount");
+
+    if (user) {
+      status.className = "status";
+      status.innerText = "Logado como " + user.name + " - " + user.email;
+      plan.innerText = user.plan;
+      usage.innerText = user.usage;
+    } else {
+      status.className = "warning";
+      status.innerText = "Você ainda não está logado.";
+      plan.innerText = "Grátis";
+      usage.innerText = "0";
+    }
+
+    mostrarHistorico();
+  }
+
+  function loginUser() {
+    const name = document.getElementById("userName").value || "Usuário";
+    const email = document.getElementById("userEmail").value || "usuario@email.com";
+
+    user = {
+      name: name,
+      email: email,
+      plan: "Grátis",
+      usage: 0
+    };
+
+    localStorage.setItem("marketUser", JSON.stringify(user));
+    atualizarInterface();
+    alert("Conta criada com sucesso!");
+  }
+
+  function logoutUser() {
+    user = null;
+    localStorage.removeItem("marketUser");
+    atualizarInterface();
+  }
+
+  function setPlan(planName) {
+    if (!user) {
+      alert("Crie uma conta antes de escolher um plano.");
+      return;
+    }
+
+    user.plan = planName;
+    localStorage.setItem("marketUser", JSON.stringify(user));
+
+    if (planName === "Grátis") {
+      alert("Plano Grátis ativado.");
+    } else {
+      alert("Upgrade simulado para o plano " + planName + ". Depois você poderá conectar Mercado Pago, Stripe ou Kiwify.");
+    }
+
+    atualizarInterface();
+  }
+
+  function previewImage(event) {
+    const preview = document.getElementById("preview");
+    const file = event.target.files[0];
+
+    if (file) {
+      preview.src = URL.createObjectURL(file);
+      preview.style.display = "block";
+    }
+  }
+
   function gerarAnuncio() {
+    if (!user) {
+      alert("Crie uma conta grátis antes de gerar seu anúncio.");
+      return;
+    }
+
+    if (user.plan === "Grátis" && user.usage >= 3) {
+      alert("Você atingiu o limite de 3 anúncios grátis. Faça upgrade para continuar.");
+      return;
+    }
+
     const produto = document.getElementById("produto").value || "Produto";
     const marketplace = document.getElementById("marketplace").value;
     const categoria = document.getElementById("categoria").value || "Categoria";
-    const extras = document.getElementById("extras").value || "produto de qualidade";
+    const marca = document.getElementById("marca").value || "Sem marca";
+    const cor = document.getElementById("cor").value || "cor variada";
+    const tamanho = document.getElementById("tamanho").value || "tamanho padrão";
+    const quantidade = document.getElementById("quantidade").value || "1 unidade";
+    const material = document.getElementById("material").value || "material resistente";
+    const publico = document.getElementById("publico").value || "compradores online";
+    const extras = document.getElementById("extras").value || "produto de qualidade, ótimo custo-benefício e ideal para uso diário";
 
-    document.getElementById("titulo").innerText =
-      `${produto} ${categoria} Alta Qualidade Para ${marketplace}`;
+    const titulo = `${produto} ${marca} ${quantidade} ${cor} ${tamanho} Para ${marketplace}`;
 
-    document.getElementById("descricao").innerText =
-      `Apresente seu ${produto} com uma descrição clara, profissional e voltada para conversão. Ideal para quem busca praticidade, qualidade e bom custo-benefício. ${extras}.`;
+    const descricao =
+`Anúncio otimizado para ${marketplace}.
 
-    document.getElementById("bullets").innerText =
-      `• Produto ideal para uso diário\n• Ótimo custo-benefício\n• Envio rápido\n• Descrição clara para o comprador\n• Anúncio otimizado para marketplace`;
+O ${produto} é ideal para ${publico} que buscam praticidade, qualidade e bom custo-benefício. Produzido em ${material}, possui características pensadas para facilitar o uso no dia a dia.
 
-    document.getElementById("cta").innerText =
-      `Garanta agora o seu ${produto} e aproveite a oferta disponível.`;
+Informações do produto:
+- Produto: ${produto}
+- Marca: ${marca}
+- Categoria: ${categoria}
+- Cor: ${cor}
+- Tamanho/Medida: ${tamanho}
+- Quantidade: ${quantidade}
 
-    document.getElementById("imagem").innerText =
-      `Criar imagem limpa com fundo claro, produto centralizado, selo de oferta e destaque para quantidade, benefício principal e chamada de compra.`;
+Diferenciais:
+${extras}
+
+Esse anúncio foi estruturado para apresentar as principais informações de forma clara, objetiva e com foco em conversão.`;
+
+    const bullets =
+`• Título otimizado para melhorar a busca dentro do marketplace
+• Descrição clara para reduzir dúvidas do comprador
+• Produto ideal para ${publico}
+• Destaque para benefícios, quantidade e diferenciais
+• Chamada de compra focada em conversão`;
+
+    const cta =
+`Garanta agora seu ${produto} e aproveite essa oportunidade antes que acabe. Clique em comprar e receba com praticidade.`;
+
+    const keywords =
+`${produto}, ${categoria}, ${marca}, ${cor}, ${tamanho}, ${quantidade}, ${marketplace}, oferta, envio rápido, produto para ${publico}`;
+
+    const imagem =
+`Crie uma imagem promocional com fundo limpo, produto centralizado, selo de oferta, destaque para "${quantidade}", chamada curta como "Oferta Especial", ícones de benefício e visual profissional para ${marketplace}.`;
+
+    const preco =
+`Sugestões de preço psicológico: R$19,90, R$29,90, R$39,90 ou R$49,90. Use valores terminados em ,90 ou ,99 para aumentar a percepção de oferta.`;
+
+    document.getElementById("titulo").innerText = titulo;
+    document.getElementById("descricao").innerText = descricao;
+    document.getElementById("bullets").innerText = bullets;
+    document.getElementById("cta").innerText = cta;
+    document.getElementById("keywords").innerText = keywords;
+    document.getElementById("imagem").innerText = imagem;
+    document.getElementById("preco").innerText = preco;
+
+    user.usage++;
+    localStorage.setItem("marketUser", JSON.stringify(user));
+
+    history.unshift({
+      produto,
+      marketplace,
+      titulo,
+      data: new Date().toLocaleString("pt-BR")
+    });
+
+    localStorage.setItem("marketHistory", JSON.stringify(history));
+    atualizarInterface();
   }
+
+  function copiarTexto(id) {
+    const texto = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(texto);
+    alert("Texto copiado!");
+  }
+
+  function mostrarHistorico() {
+    const container = document.getElementById("history");
+    container.innerHTML = "";
+
+    if (history.length === 0) {
+      container.innerHTML = "<p>Nenhum anúncio gerado ainda.</p>";
+      return;
+    }
+
+    history.forEach(item => {
+      const div = document.createElement("div");
+      div.className = "history-item";
+      div.innerHTML = `
+        <strong>${item.produto}</strong>
+        <p>${item.marketplace}</p>
+        <p>${item.titulo}</p>
+        <small>${item.data}</small>
+      `;
+      container.appendChild(div);
+    });
+  }
+
+  function limparHistorico() {
+    history = [];
+    localStorage.removeItem("marketHistory");
+    mostrarHistorico();
+  }
+
+  atualizarInterface();
 </script>
 
 </body>
 </html>
+```
