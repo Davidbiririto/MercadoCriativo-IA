@@ -13,325 +13,614 @@
 
         body {
             font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: #f9fafc;
+            background: #ffffff;
             color: #1a2c3e;
             scroll-behavior: smooth;
         }
 
-        /* Gradientes e cores */
         :root {
-            --primary: #0f3b5f;
-            --primary-dark: #0a2c46;
-            --primary-light: #eef2ff;
-            --accent: #2c7da0;
-            --accent-light: #61a5c2;
-            --gray-bg: #f8fafc;
-            --card-white: #ffffff;
-            --border-light: #e9ecef;
-            --shadow-sm: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
-            --shadow-md: 0 20px 25px -12px rgba(0, 0, 0, 0.08);
-            --radius-lg: 1.5rem;
-            --radius-md: 1rem;
+            --primary: #0A2647;
+            --primary-dark: #051b34;
+            --primary-light: #e8f0fe;
+            --secondary: #2C7DA0;
+            --secondary-light: #61a5c2;
+            --accent: #FFB703;
+            --accent-dark: #FB8500;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-900: #0f172a;
+            --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            --shadow-md: 0 4px 6px -4px rgb(0 0 0 / 0.1), 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+            --radius-sm: 0.5rem;
+            --radius-md: 0.75rem;
+            --radius-lg: 1rem;
+            --radius-xl: 1.5rem;
+            --radius-2xl: 2rem;
         }
 
-        /* Container responsivo */
+        /* Glassmorphism e efeitos modernos */
+        .glass {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+        }
+
         .container {
             max-width: 1280px;
             margin: 0 auto;
-            padding: 0 1.5rem;
+            padding: 0 2rem;
         }
 
-        /* Navbar */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.25rem;
+            }
+        }
+
+        /* Navbar Premium */
         .navbar {
-            background: var(--card-white);
-            backdrop-filter: blur(0px);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.03), 0 1px 2px rgba(0,0,0,0.05);
             position: sticky;
             top: 0;
-            z-index: 50;
-            padding: 1rem 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--gray-200);
+            transition: all 0.3s ease;
         }
+
         .nav-container {
             display: flex;
-            justify-content: space-between;
+ justify-content: space-between;
             align-items: center;
+            padding: 1rem 0;
+            gap: 1.5rem;
             flex-wrap: wrap;
         }
+
         .logo {
-            font-size: 1.6rem;
+            font-size: 1.75rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #0f3b5f, #2c7da0);
-            background-clip: text;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             -webkit-background-clip: text;
+            background-clip: text;
             color: transparent;
             letter-spacing: -0.02em;
+            cursor: pointer;
         }
+
         .nav-links {
             display: flex;
             gap: 2rem;
             align-items: center;
             flex-wrap: wrap;
         }
+
         .nav-links a {
             text-decoration: none;
             font-weight: 500;
-            color: #2c3e50;
-            transition: color 0.2s;
+            font-size: 0.95rem;
+            color: var(--gray-700);
+            transition: all 0.2s;
+            position: relative;
         }
+
         .nav-links a:hover {
-            color: var(--accent);
+            color: var(--secondary);
         }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.2s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
         .user-info {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            background: #f1f5f9;
-            padding: 0.4rem 1rem;
-            border-radius: 40px;
+            gap: 0.75rem;
+            background: var(--gray-100);
+            padding: 0.4rem 1rem 0.4rem 1.2rem;
+            border-radius: 100px;
+            border: 1px solid var(--gray-200);
         }
+
         .user-email {
             font-size: 0.85rem;
-            font-weight: 500;
-            color: #1e293b;
-        }
-        .badge-plan {
-            background: #0f3b5f;
-            color: white;
-            padding: 0.2rem 0.7rem;
-            border-radius: 50px;
-            font-size: 0.7rem;
             font-weight: 600;
+            color: var(--gray-900);
         }
-        .btn-sm {
-            background: none;
-            border: 1px solid #cbd5e1;
+
+        .badge-plan {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
             padding: 0.2rem 0.8rem;
-            border-radius: 30px;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .btn-sm {
+            background: transparent;
+            border: 1px solid var(--gray-300);
+            padding: 0.3rem 0.9rem;
+            border-radius: 100px;
             cursor: pointer;
             font-weight: 500;
-            transition: 0.2s;
+            font-size: 0.8rem;
+            transition: all 0.2s;
         }
+
         .btn-sm:hover {
-            background: #eef2ff;
+            background: var(--gray-200);
+            border-color: var(--gray-400);
         }
-        /* Botões */
+
         .btn-primary {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             border: none;
-            padding: 0.75rem 1.8rem;
-            border-radius: 2rem;
+            padding: 0.875rem 2rem;
+            border-radius: 100px;
             font-weight: 600;
             font-size: 1rem;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.3s ease;
             box-shadow: var(--shadow-sm);
-        }
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-        }
-        .btn-outline {
-            background: transparent;
-            border: 1.5px solid var(--primary);
-            color: var(--primary);
-            padding: 0.7rem 1.6rem;
-            border-radius: 2rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .btn-outline:hover {
-            background: var(--primary-light);
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Hero */
-        .hero {
-            background: linear-gradient(135deg, #f1f9fe 0%, #eef2fa 100%);
-            padding: 4rem 0 5rem;
-            border-bottom: 1px solid var(--border-light);
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+            padding: 0.75rem 1.8rem;
+            border-radius: 100px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-outline:hover {
+            background: var(--secondary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section Moderno */
+        .hero {
+            background: linear-gradient(135deg, #f7f9fc 0%, #eef2fa 100%);
+            padding: 5rem 0 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: radial-gradient(circle at 100% 0%, rgba(44,125,160,0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(44,125,160,0.1);
+            color: var(--secondary);
+            padding: 0.3rem 1rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 800;
             line-height: 1.2;
-            color: #0a2c46;
-            margin-bottom: 1.2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
         }
+
         .hero p {
             font-size: 1.2rem;
-            color: #2c3e50;
-            max-width: 600px;
+            color: var(--gray-600);
+            line-height: 1.6;
             margin-bottom: 2rem;
         }
 
-        /* Cards, seções */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Seções Gerais */
         .section {
-            padding: 4rem 0;
+            padding: 5rem 0;
         }
+
+        .section-alt {
+            background: var(--gray-50);
+        }
+
         .section-title {
-            font-size: 2rem;
-            font-weight: 700;
+            font-size: 2.5rem;
+            font-weight: 800;
             text-align: center;
-            margin-bottom: 2.5rem;
-            color: #0f3b5f;
+            margin-bottom: 1rem;
+            color: var(--gray-900);
+            letter-spacing: -0.02em;
         }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--gray-600);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        /* Cards de Passos */
         .steps-grid {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
+            margin-top: 2rem;
         }
+
         .step-card {
             background: white;
             padding: 2rem;
-            border-radius: var(--radius-md);
+            border-radius: var(--radius-xl);
             box-shadow: var(--shadow-sm);
-            flex: 1;
-            min-width: 220px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-200);
             text-align: center;
-            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
         }
-        .step-number {
-            background: var(--primary-light);
-            width: 48px;
-            height: 48px;
+
+        .step-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--secondary-light);
+        }
+
+        .step-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-light), white);
+            border-radius: 100px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 60px;
-            font-weight: 800;
-            font-size: 1.6rem;
-            margin: 0 auto 1rem;
-            color: var(--primary);
-        }
-
-        /* plano cards */
-        .plans-grid {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .plan-card {
-            background: white;
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-sm);
-            padding: 2rem 1.8rem;
-            width: 280px;
-            transition: 0.2s;
-            border: 1px solid #eef2ff;
-        }
-        .plan-card.pro {
-            border-top: 4px solid var(--accent);
-        }
-        .plan-price {
+            margin: 0 auto 1.5rem;
             font-size: 2rem;
             font-weight: 800;
-            margin: 1rem 0;
-        }
-        .btn-upgrade {
-            background: #f1f5f9;
-            border: none;
-            width: 100%;
-            padding: 0.7rem;
-            border-radius: 2rem;
-            font-weight: 600;
-            margin-top: 1rem;
-            cursor: pointer;
-        }
-        .btn-upgrade.primary {
-            background: var(--primary);
-            color: white;
+            color: var(--secondary);
+            border: 1px solid var(--gray-200);
         }
 
-        /* Formulário e área de geração */
+        .step-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--gray-900);
+        }
+
+        .step-card p {
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        /* Form Card Premium */
         .form-card {
             background: white;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-md);
-            padding: 2rem;
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-xl);
+            padding: 2.5rem;
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s ease;
         }
+
+        .form-card:hover {
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.2);
+        }
+
         .two-columns {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
         }
+
         .form-group {
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.25rem;
         }
-        label {
+
+        .form-group label {
             font-weight: 600;
             display: block;
-            margin-bottom: 0.4rem;
-            color: #1a2c3e;
+            margin-bottom: 0.5rem;
+            color: var(--gray-700);
+            font-size: 0.9rem;
         }
+
         input, select, textarea {
             width: 100%;
-            padding: 0.7rem 1rem;
-            border-radius: 0.8rem;
-            border: 1px solid #cbd5e1;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-md);
+            border: 1.5px solid var(--gray-200);
             font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            background: white;
         }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(44,125,160,0.1);
+        }
+
         .image-preview {
             margin-top: 1rem;
             max-width: 100%;
-            max-height: 180px;
-            border-radius: 1rem;
+            max-height: 200px;
+            border-radius: var(--radius-lg);
             object-fit: cover;
-            border: 1px solid #e2e8f0;
+            border: 2px solid var(--gray-200);
         }
-        .result-area {
-            background: #f8fafc;
-            border-radius: 1.2rem;
-            padding: 1.5rem;
+
+        /* Planos Cards */
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
             margin-top: 2rem;
         }
+
+        .plan-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-200);
+            position: relative;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .plan-card.popular {
+            border: 2px solid var(--accent);
+            transform: scale(1.02);
+        }
+
+        .plan-badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: var(--accent);
+            color: var(--gray-900);
+            padding: 0.3rem 1rem;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .plan-name {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--gray-900);
+        }
+
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        .plan-price small {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--gray-600);
+        }
+
+        .plan-features {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .plan-features li {
+            padding: 0.5rem 0;
+            color: var(--gray-600);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-upgrade {
+            width: 100%;
+            padding: 0.875rem;
+            border-radius: 100px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            background: var(--gray-100);
+            color: var(--gray-700);
+        }
+
+        .btn-upgrade.primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .btn-upgrade.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Resultado Area */
+        .result-area {
+            background: linear-gradient(135deg, #f8fafc, #ffffff);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 1px solid var(--gray-200);
+        }
+
         .result-block {
             background: white;
-            border-radius: 1rem;
-            padding: 1rem;
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
             margin-bottom: 1rem;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--secondary);
+            box-shadow: var(--shadow-xs);
+            transition: all 0.2s;
         }
+
+        .result-block:hover {
+            box-shadow: var(--shadow-sm);
+        }
+
         .copy-btn {
-            background: #eef2ff;
-            border: none;
+            background: var(--gray-100);
+            border: 1px solid var(--gray-200);
             padding: 0.3rem 1rem;
-            border-radius: 30px;
+            border-radius: 100px;
             font-size: 0.75rem;
             cursor: pointer;
             margin-left: 1rem;
+            transition: all 0.2s;
         }
+
+        .copy-btn:hover {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+        }
+
+        /* History */
         .history-list {
-            max-height: 300px;
+            max-height: 400px;
             overflow-y: auto;
         }
+
         .history-item {
+            background: var(--gray-50);
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s;
+        }
+
+        .history-item:hover {
             background: white;
-            padding: 0.8rem;
-            margin-bottom: 0.6rem;
-            border-radius: 1rem;
-            font-size: 0.85rem;
+            box-shadow: var(--shadow-sm);
         }
-        @media (max-width: 768px) {
-            .two-columns { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 2rem; }
-            .nav-links { gap: 1rem; margin-top: 0.5rem; }
-            .container { padding: 0 1rem; }
+
+        /* Alert */
+        .alert-demo {
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            border-radius: var(--radius-lg);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #ef4444;
         }
+
+        /* Footer */
         footer {
-            background: #0f172a;
-            color: #94a3b8;
-            padding: 2rem 0;
+            background: var(--gray-900);
+            color: var(--gray-400);
+            padding: 3rem 0;
             text-align: center;
         }
-        .alert-demo {
-            background: #e0f2fe;
-            border-radius: 1rem;
-            padding: 0.8rem;
-            font-size: 0.8rem;
-            margin-bottom: 1rem;
+
+        /* Modal */
+        #loginModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 450px;
+            margin: 1rem;
+            padding: 2rem;
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .two-columns {
+                grid-template-columns: 1fr;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .nav-container {
+                flex-direction: column;
+            }
+            .nav-links {
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -339,78 +628,134 @@
 
 <div class="navbar">
     <div class="container nav-container">
-        <div class="logo">MarketCriativo IA</div>
+        <div class="logo" onclick="scrollToTop()">MarketCriativo IA</div>
         <div class="nav-links">
             <a href="#como-funciona">Como funciona</a>
             <a href="#gerador">Gerador</a>
             <a href="#planos">Planos</a>
-            <a href="#historico">Painel</a>
+            <a href="#historico">Histórico</a>
             <div id="authArea" class="user-info" style="display: none;">
                 <span id="userNameDisplay" class="user-email"></span>
                 <span id="planBadge" class="badge-plan">Grátis</span>
                 <button id="logoutBtn" class="btn-sm">Sair</button>
             </div>
-            <button id="showLoginBtn" class="btn-sm" style="background:#0f3b5f; color:white; border:none;">Entrar</button>
+            <button id="showLoginBtn" class="btn-primary" style="padding: 0.5rem 1.2rem;">Entrar</button>
         </div>
     </div>
 </div>
 
-<!-- Modal de login simulado -->
-<div id="loginModal" style="display: none; position:fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); align-items:center; justify-content:center; z-index:1000;">
-    <div style="background:white; max-width:400px; margin:2rem; padding:2rem; border-radius:2rem;">
-        <h3>Criar conta / Entrar</h3>
-        <input type="text" id="loginName" placeholder="Seu nome" style="margin:0.5rem 0;">
-        <input type="email" id="loginEmail" placeholder="E-mail" style="margin:0.5rem 0;">
-        <button id="confirmLoginBtn" class="btn-primary" style="width:100%; margin-top:1rem;">Criar conta / Entrar</button>
-        <button id="closeModalBtn" style="margin-top:1rem; width:100%; background:#f1f5f9; border:none; padding:0.5rem;">Cancelar</button>
-        <p style="font-size:0.7rem; margin-top:1rem;">Modo demonstração • dados salvos localmente</p>
+<div id="loginModal">
+    <div class="modal-content">
+        <h3 style="margin-bottom:1rem;">✨ Comece a vender mais</h3>
+        <p style="margin-bottom:1.5rem; color: var(--gray-600);">Crie sua conta grátis e gere anúncios profissionais com IA</p>
+        <input type="text" id="loginName" placeholder="Seu nome completo" style="margin-bottom:1rem;">
+        <input type="email" id="loginEmail" placeholder="Seu e-mail" style="margin-bottom:1rem;">
+        <button id="confirmLoginBtn" class="btn-primary" style="width:100%; margin-bottom:0.75rem;">Criar conta grátis</button>
+        <button id="closeModalBtn" class="btn-outline" style="width:100%;">Cancelar</button>
+        <p style="font-size:0.7rem; margin-top:1rem; text-align:center; color:var(--gray-500);">✅ MVP demonstrativo • Dados salvos localmente</p>
     </div>
 </div>
 
 <main>
-    <!-- Hero -->
+    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>Crie anúncios profissionais para Shopee, Mercado Livre e Amazon em segundos.</h1>
-            <p>Envie a foto do produto, informe os dados principais e gere título, descrição, bullet points, CTA, palavras-chave e ideias de criativos para vender mais.</p>
-            <button id="heroCtaBtn" class="btn-primary">Gerar meu primeiro anúncio grátis</button>
+            <div class="hero-content">
+                <span class="hero-badge">⚡ IA de alta performance</span>
+                <h1>Crie anúncios profissionais para Shopee, Mercado Livre e Amazon em segundos.</h1>
+                <p>Envie a foto do produto, informe os dados principais e gere título, descrição, bullet points, CTA, palavras-chave e ideias de criativos para vender mais.</p>
+                <button id="heroCtaBtn" class="btn-primary">🚀 Gerar meu primeiro anúncio grátis</button>
+            </div>
         </div>
     </section>
 
     <!-- Como funciona -->
     <section id="como-funciona" class="section">
         <div class="container">
-            <h2 class="section-title">⚡ Como funciona</h2>
+            <h2 class="section-title">🚀 Como funciona</h2>
+            <p class="section-subtitle">Três passos simples para anúncios que convertem</p>
             <div class="steps-grid">
-                <div class="step-card"><div class="step-number">1</div><h3>Envie o produto</h3><p>Faça upload da foto e preencha os detalhes.</p></div>
-                <div class="step-card"><div class="step-number">2</div><h3>A IA estrutura o anúncio</h3><p>Geramos texto otimizado para conversão.</p></div>
-                <div class="step-card"><div class="step-number">3</div><h3>Copie e publique</h3><p>Com poucos cliques, seu anúncio está pronto.</p></div>
+                <div class="step-card">
+                    <div class="step-icon">1</div>
+                    <h3>Envie o produto</h3>
+                    <p>Faça upload da foto e preencha os detalhes do seu produto</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">2</div>
+                    <h3>A IA estrutura o anúncio</h3>
+                    <p>Nossa inteligência artificial gera textos otimizados para conversão</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">3</div>
+                    <h3>Copie e publique</h3>
+                    <p>Com apenas um clique, seu anúncio profissional está pronto</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Gerador -->
-    <section id="gerador" class="section">
+    <section id="gerador" class="section section-alt">
         <div class="container">
             <div class="form-card">
-                <h2 style="margin-bottom:1.5rem;">🎯 Gerar Anúncio com IA</h2>
+                <h2 style="margin-bottom:0.5rem;">🎯 Gerar Anúncio com IA</h2>
+                <p style="margin-bottom:1.5rem; color: var(--gray-600);">Preencha os dados do seu produto e nossa IA fará a mágica</p>
                 <div class="two-columns">
                     <div>
-                        <div class="form-group"><label>Imagem do produto</label><input type="file" id="productImage" accept="image/*"></div>
-                        <div class="form-group"><label>Nome do produto</label><input type="text" id="prodName" placeholder="Ex: Fone Bluetooth"></div>
-                        <div class="form-group"><label>Marketplace</label><select id="marketplace"><option>Shopee</option><option>Mercado Livre</option><option>Amazon</option></select></div>
-                        <div class="form-group"><label>Categoria</label><input id="category" placeholder="Eletrônicos, Moda..."></div>
-                        <div class="form-group"><label>Marca</label><input id="brand" placeholder="Marca"></div>
-                        <div class="form-group"><label>Cor</label><input id="color" placeholder="Cor"></div>
-                        <div class="form-group"><label>Tamanho/Medida</label><input id="size" placeholder="Único, G, 10cm..."></div>
-                        <div class="form-group"><label>Quantidade</label><input id="quantity" placeholder="1 un, 2 peças"></div>
-                        <div class="form-group"><label>Material</label><input id="material" placeholder="Algodão, Plástico..."></div>
-                        <div class="form-group"><label>Público-alvo</label><input id="target" placeholder="Ex: gamers, mães, esportistas"></div>
-                        <div class="form-group"><label>Diferenciais</label><textarea id="differentials" rows="2" placeholder="Garantia, design exclusivo..."></textarea></div>
-                        <button id="generateBtn" class="btn-primary" style="width:100%">Gerar anúncio com IA</button>
+                        <div class="form-group">
+                            <label>📸 Imagem do produto</label>
+                            <input type="file" id="productImage" accept="image/*" style="padding: 0.5rem;">
+                        </div>
+                        <div class="form-group">
+                            <label>🏷️ Nome do produto</label>
+                            <input type="text" id="prodName" placeholder="Ex: Fone Bluetooth Premium">
+                        </div>
+                        <div class="form-group">
+                            <label>🛒 Marketplace</label>
+                            <select id="marketplace">
+                                <option>Shopee</option>
+                                <option>Mercado Livre</option>
+                                <option>Amazon</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>📂 Categoria</label>
+                            <input id="category" placeholder="Ex: Eletrônicos, Moda, Casa">
+                        </div>
+                        <div class="form-group">
+                            <label>🏢 Marca</label>
+                            <input id="brand" placeholder="Marca do produto">
+                        </div>
+                        <div class="form-group">
+                            <label>🎨 Cor</label>
+                            <input id="color" placeholder="Ex: Preto, Branco, Azul">
+                        </div>
+                        <div class="form-group">
+                            <label>📏 Tamanho/Medida</label>
+                            <input id="size" placeholder="Ex: Único, G, 10cm">
+                        </div>
+                        <div class="form-group">
+                            <label>📦 Quantidade</label>
+                            <input id="quantity" placeholder="Ex: 1 unidade, 2 peças">
+                        </div>
+                        <div class="form-group">
+                            <label>🔧 Material</label>
+                            <input id="material" placeholder="Ex: Algodão, Plástico, Metal">
+                        </div>
+                        <div class="form-group">
+                            <label>👥 Público-alvo</label>
+                            <input id="target" placeholder="Ex: Gamers, Mães, Esportistas">
+                        </div>
+                        <div class="form-group">
+                            <label>⭐ Diferenciais</label>
+                            <textarea id="differentials" rows="2" placeholder="Ex: Garantia estendida, design exclusivo"></textarea>
+                        </div>
+                        <button id="generateBtn" class="btn-primary" style="width:100%">✨ Gerar anúncio com IA</button>
                     </div>
                     <div>
-                        <div id="imagePreviewArea"><img id="imgPreview" class="image-preview" style="display:none; max-width:100%;"></div>
+                        <div id="imagePreviewArea">
+                            <img id="imgPreview" class="image-preview" style="display:none;">
+                        </div>
                         <div id="limitMessage" class="alert-demo" style="display:none;"></div>
                     </div>
                 </div>
@@ -422,35 +767,68 @@
     <!-- Planos -->
     <section id="planos" class="section">
         <div class="container">
-            <h2 class="section-title">💰 Escolha seu plano</h2>
+            <h2 class="section-title">💰 Planos que cabem no seu bolso</h2>
+            <p class="section-subtitle">Escolha o plano ideal para o seu negócio</p>
             <div class="plans-grid">
-                <div class="plan-card"><h3>Grátis</h3><div class="plan-price">R$0</div><p>3 gerações para testar</p><button data-plan="free" class="btn-upgrade">Plano atual</button></div>
-                <div class="plan-card"><h3>Básico</h3><div class="plan-price">R$19,90/mês</div><p>50 anúncios / mês</p><button data-plan="basico" class="btn-upgrade primary">Upgrade simulado</button></div>
-                <div class="plan-card pro"><h3>Pro</h3><div class="plan-price">R$99,90/mês</div><p>Anúncios ilimitados + histórico completo</p><button data-plan="pro" class="btn-upgrade primary">Upgrade simulado</button></div>
+                <div class="plan-card">
+                    <div class="plan-name">Grátis</div>
+                    <div class="plan-price">R$0 <small>/mês</small></div>
+                    <ul class="plan-features">
+                        <li>✓ 3 gerações para testar</li>
+                        <li>✓ Anúncios básicos</li>
+                        <li>✓ Histórico limitado</li>
+                    </ul>
+                    <button data-plan="free" class="btn-upgrade">Plano atual</button>
+                </div>
+                <div class="plan-card popular">
+                    <div class="plan-badge">🔥 Mais Popular</div>
+                    <div class="plan-name">Básico</div>
+                    <div class="plan-price">R$19,90 <small>/mês</small></div>
+                    <ul class="plan-features">
+                        <li>✓ 50 anúncios por mês</li>
+                        <li>✓ Otimização avançada</li>
+                        <li>✓ Suporte prioritário</li>
+                    </ul>
+                    <button data-plan="basico" class="btn-upgrade primary">Upgrade simulado</button>
+                </div>
+                <div class="plan-card">
+                    <div class="plan-name">Pro</div>
+                    <div class="plan-price">R$99,90 <small>/mês</small></div>
+                    <ul class="plan-features">
+                        <li>✓ Anúncios ilimitados</li>
+                        <li>✓ Histórico completo</li>
+                        <li>✓ Consultoria exclusiva</li>
+                    </ul>
+                    <button data-plan="pro" class="btn-upgrade primary">Upgrade simulado</button>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Histórico / Painel -->
-    <section id="historico" class="section">
+    <!-- Histórico -->
+    <section id="historico" class="section section-alt">
         <div class="container">
             <div class="form-card">
-                <h2>📋 Histórico de anúncios gerados</h2>
-                <div id="historyList" class="history-list"><p style="color:gray;">Nenhum anúncio gerado ainda.</p></div>
-                <button id="clearHistoryBtn" class="btn-outline" style="margin-top:1rem;">Limpar histórico</button>
+                <h2 style="margin-bottom:0.5rem;">📋 Histórico de anúncios</h2>
+                <p style="margin-bottom:1.5rem; color: var(--gray-600);">Seus anúncios gerados ficam salvos aqui</p>
+                <div id="historyList" class="history-list">
+                    <p style="color:var(--gray-500); text-align:center;">Nenhum anúncio gerado ainda</p>
+                </div>
+                <button id="clearHistoryBtn" class="btn-outline" style="margin-top:1.5rem;">🗑️ Limpar histórico</button>
             </div>
         </div>
     </section>
 </main>
+
 <footer>
-    <p>MarketCriativo IA — soluções para vendedores modernos. MVP demonstrativo.</p>
+    <p>© 2024 MarketCriativo IA — Soluções inteligentes para vendedores modernos</p>
+    <p style="margin-top:0.5rem; font-size:0.8rem;">🚀 MVP demonstrativo | IA para e-commerce</p>
 </footer>
 
 <script>
-    // estado do usuário e plano
     let currentUser = JSON.parse(localStorage.getItem('marketUser')) || null;
     let generationsCount = parseInt(localStorage.getItem('generationCount')) || 0;
-    let userPlan = localStorage.getItem('userPlan') || 'free'; // free, basico, pro
+    let userPlan = localStorage.getItem('userPlan') || 'free';
     let history = JSON.parse(localStorage.getItem('adHistory')) || [];
 
     function saveUserData() {
@@ -523,7 +901,6 @@
         const cta = `Garanta agora seu ${name} e aproveite esta oportunidade antes que acabe! Frete rápido para todo Brasil.`;
         const keywords = `${name}, ${brand}, ${category}, ${color}, ${size}, ${marketplace}, oferta, ${target}, envio rápido, qualidade, ${material}`;
         const imageIdea = `Imagem com fundo limpo, produto centralizado, selo "Oferta Limitada", destaque para ${qty}, ícones: frete grátis, garantia, pagamento seguro.`;
-        const psicologicPrice = Math.floor(Math.random() * 40 + 20) + (Math.random() > 0.5 ? 0.9 : 0.9);
         const priceSuggestion = `R$ ${(Math.random() * 50 + 29).toFixed(2).replace('.',',')}`;
 
         return { title, description, bullets, cta, keywords, imageIdea, priceSuggestion };
@@ -539,16 +916,16 @@
             <div class="result-block"><strong>🎯 CTA de venda:</strong> ${result.cta} <button class="copy-btn" data-clip="${result.cta}">Copiar</button></div>
             <div class="result-block"><strong>🔑 Palavras-chave:</strong> ${result.keywords} <button class="copy-btn" data-clip="${result.keywords}">Copiar</button></div>
             <div class="result-block"><strong>🖼️ Ideia de imagem promocional:</strong> ${result.imageIdea} <button class="copy-btn" data-clip="${result.imageIdea}">Copiar</button></div>
-            <div class="result-block"><strong>💰 Sugestão de preço psicológico:</strong> ${priceSuggestion} <button class="copy-btn" data-clip="${priceSuggestion}">Copiar</button></div>
+            <div class="result-block"><strong>💰 Sugestão de preço psicológico:</strong> ${result.priceSuggestion} <button class="copy-btn" data-clip="${result.priceSuggestion}">Copiar</button></div>
         `;
         document.querySelectorAll('.copy-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const text = btn.getAttribute('data-clip');
                 navigator.clipboard.writeText(text);
-                alert('Copiado!');
+                alert('✅ Copiado para área de transferência!');
             });
         });
-        // salvar histórico
+        
         const historyItem = {
             product: productName,
             marketplace: marketplaceUsed,
@@ -564,11 +941,15 @@
     function renderHistory() {
         const historyDiv = document.getElementById('historyList');
         if(!history.length) {
-            historyDiv.innerHTML = '<p style="color:gray;">Nenhum anúncio gerado ainda.</p>';
+            historyDiv.innerHTML = '<p style="color:var(--gray-500); text-align:center;">Nenhum anúncio gerado ainda</p>';
             return;
         }
         historyDiv.innerHTML = history.map(item => `
-            <div class="history-item"><strong>${item.product}</strong> | ${item.marketplace}<br><small>${item.title.substring(0, 70)}...</small><br><span style="font-size:0.7rem;">${item.date}</span></div>
+            <div class="history-item">
+                <strong>${item.product}</strong> | ${item.marketplace}<br>
+                <small>${item.title.substring(0, 80)}...</small><br>
+                <span style="font-size:0.7rem; color:var(--gray-500);">📅 ${item.date}</span>
+            </div>
         `).join('');
     }
 
@@ -576,28 +957,26 @@
         history = [];
         localStorage.setItem('adHistory', '[]');
         renderHistory();
-        alert('Histórico limpo!');
+        alert('🗑️ Histórico limpo com sucesso!');
     });
 
-    // upgrade simulado
     document.querySelectorAll('[data-plan]').forEach(btn => {
         btn.addEventListener('click', (e) => {
             let plan = btn.getAttribute('data-plan');
-            if(plan === 'free') return alert('Você já está no plano Grátis.');
-            if(plan === 'basico') { userPlan = 'basico'; alert('Upgrade para Básico (modo demonstração). 50 anúncios/mês.'); }
-            if(plan === 'pro') { userPlan = 'pro'; alert('Upgrade para Pro (modo demonstração). Anúncios ilimitados!'); }
+            if(plan === 'free') return alert('✅ Você já está no plano Grátis.');
+            if(plan === 'basico') { userPlan = 'basico'; alert('🚀 Upgrade para Básico (modo demonstração). 50 anúncios/mês.'); }
+            if(plan === 'pro') { userPlan = 'pro'; alert('💎 Upgrade para Pro (modo demonstração). Anúncios ilimitados!'); }
             localStorage.setItem('userPlan', userPlan);
             if(currentUser) updateUIByAuth();
             showLimitWarning();
         });
     });
 
-    // geração principal
     document.getElementById('generateBtn').addEventListener('click', () => {
-        if(!currentUser) { alert('Por favor, crie uma conta/faça login primeiro.'); return; }
-        if(!canGenerate()) { alert(`Limite excedido! ${getRemainingText()} . Faça upgrade.`); return; }
+        if(!currentUser) { alert('🔐 Por favor, crie uma conta grátis primeiro.'); return; }
+        if(!canGenerate()) { alert(`⚠️ Limite excedido! ${getRemainingText()} . Faça upgrade.`); return; }
         const prodName = document.getElementById('prodName').value;
-        if(!prodName) { alert('Informe o nome do produto'); return; }
+        if(!prodName) { alert('📝 Por favor, informe o nome do produto'); return; }
         const result = generateAdText();
         generationsCount++;
         localStorage.setItem('generationCount', generationsCount);
@@ -606,7 +985,6 @@
         updateUIByAuth();
     });
 
-    // preview imagem
     document.getElementById('productImage').addEventListener('change', (e) => {
         const file = e.target.files[0];
         if(file) {
@@ -620,12 +998,13 @@
         }
     });
 
-    // sistema de login
     const modal = document.getElementById('loginModal');
     function openModal() { modal.style.display = 'flex'; }
     function closeModal() { modal.style.display = 'none'; }
+    
     document.getElementById('showLoginBtn').addEventListener('click', openModal);
     document.getElementById('closeModalBtn').addEventListener('click', closeModal);
+    
     document.getElementById('confirmLoginBtn').addEventListener('click', () => {
         const name = document.getElementById('loginName').value.trim();
         const email = document.getElementById('loginEmail').value.trim();
@@ -639,8 +1018,9 @@
         closeModal();
         updateUIByAuth();
         showLimitWarning();
-        alert(`Bem-vindo(a) ${name}! Plano Grátis ativo: 3 gerações.`);
+        alert(`✨ Bem-vindo(a) ${name}! Seu plano Grátis está ativo: 3 gerações para testar.`);
     });
+    
     document.getElementById('logoutBtn').addEventListener('click', () => {
         currentUser = null;
         localStorage.removeItem('marketUser');
@@ -651,16 +1031,18 @@
         updateUIByAuth();
         showLimitWarning();
         document.getElementById('resultContainer').style.display = 'none';
-        alert('Você saiu da conta.');
+        alert('🔓 Você saiu da conta.');
     });
 
-    // hero cta
     document.getElementById('heroCtaBtn').addEventListener('click', () => {
         if(!currentUser) openModal();
         else document.getElementById('gerador').scrollIntoView({ behavior: 'smooth' });
     });
 
-    // inicializar
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     if(currentUser) { updateUIByAuth(); showLimitWarning(); }
     else { updateUIByAuth(); }
     renderHistory();
