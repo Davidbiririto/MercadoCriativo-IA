@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MarketCriativo IA | Gerador de Anúncios com IA</title>
+  <meta name="description" content="Crie títulos, descrições, bullet points, palavras-chave e criativos profissionais para Shopee, Mercado Livre e Amazon com IA." />
+  <style>
+    :root{
+      --blue:#2563eb;
+      --blue-dark:#1d4ed8;
+      --navy:#0f172a;
+      --muted:#64748b;
+      --line:#e2e8f0;
+      --soft:#f8fafc;
+      --white:#ffffff;
+      --green:#059669;
+      --orange:#ea580c;
+      --shadow:0 22px 60px rgba(15,23,42,.10);
+      --radius:24px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:#f4f7fb;color:#0f172a;line-height:1.5}
+    a{text-decoration:none;color:inherit}
+    button,input,select,textarea{font-family:inherit}
+    .page-shell{overflow:hidden}
+    .hero-wrap{background:radial-gradient(circle at top left,#3b82f6 0,#1d4ed8 28%,#0f172a 72%);color:white;position:relative}
+    .hero-wrap:before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,255,255,.12),transparent 35%,rgba(37,99,235,.18));pointer-events:none}
+    nav{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:24px 7%;gap:22px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:900;font-size:22px}
+    .logo-icon{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,#fff,#bfdbfe);display:grid;place-items:center;color:#1d4ed8;box-shadow:0 10px 30px rgba(0,0,0,.18)}
+    .nav-links{display:flex;gap:22px;color:#dbeafe;font-size:14px;align-items:center}
+    .nav-links a:hover{color:white}
+    .nav-actions{display:flex;gap:12px;align-items:center}
+    .btn{border:0;border-radius:14px;padding:14px 20px;font-weight:800;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-size:15px}
+    .btn-primary{background:var(--blue);color:white;box-shadow:0 12px 30px rgba(37,99,235,.25)}
+    .btn-primary:hover{background:var(--blue-dark);transform:translateY(-1px)}
+    .btn-white{background:white;color:#1d4ed8}
+    .btn-white:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(255,255,255,.18)}
+    .btn-dark{background:#111827;color:white}
+    .btn-ghost{background:#eef2ff;color:#1d4ed8}
+    .btn-line{background:white;color:#0f172a;border:1px solid var(--line)}
+    .btn-full{width:100%;margin-top:16px}
+    .hero{position:relative;z-index:2;padding:64px 7% 92px;display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center}
+    .eyebrow{display:inline-flex;gap:8px;align-items:center;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);color:#e0f2fe;padding:9px 13px;border-radius:999px;font-size:13px;font-weight:800;margin-bottom:20px}
+    h1{font-size:58px;line-height:1.02;letter-spacing:-2px;margin-bottom:22px}
+    .hero p{font-size:19px;color:#dbeafe;max-width:740px;margin-bottom:28px}
+    .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+    .hero-note{margin-top:18px;color:#bfdbfe;font-size:14px}
+    .hero-panel{background:rgba(255,255,255,.96);color:#0f172a;border-radius:32px;padding:24px;box-shadow:0 35px 100px rgba(0,0,0,.32);border:1px solid rgba(255,255,255,.35)}
+    .panel-top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:18px}
+    .mini-badge{display:inline-flex;background:#dbeafe;color:#1d4ed8;padding:7px 10px;border-radius:999px;font-size:12px;font-weight:900}
+    .fake-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:18px;padding:16px;margin-top:12px}
+    .fake-card strong{color:#1d4ed8}
+    .metric-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+    .metric{background:#eff6ff;border-radius:16px;padding:14px;text-align:center}
+    .metric b{display:block;font-size:18px;color:#1d4ed8}
+    section{padding:72px 7%}
+    .section-title{text-align:center;max-width:830px;margin:0 auto 42px}
+    .section-title h2{font-size:38px;letter-spacing:-1px;margin-bottom:12px}
+    .section-title p{color:var(--muted);font-size:17px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+    .card{background:white;border:1px solid rgba(226,232,240,.95);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow)}
+    .card h3{font-size:21px;margin-bottom:10px}
+    .card p{color:var(--muted)}
+    .icon{width:46px;height:46px;border-radius:16px;background:#eff6ff;color:#1d4ed8;display:grid;place-items:center;font-size:22px;margin-bottom:15px}
+    .app-zone{background:linear-gradient(180deg,#f8fafc,#eef4ff)}
+    label{display:block;margin:14px 0 7px;font-weight:800;font-size:14px;color:#334155}
+    input,select,textarea{width:100%;border:1px solid #dbe3ef;border-radius:15px;padding:14px 14px;font-size:15px;background:white;color:#0f172a;outline:none;transition:.2s}
+    input:focus,select:focus,textarea:focus{border-color:#2563eb;box-shadow:0 0 0 4px rgba(37,99,235,.10)}
+    textarea{resize:vertical;min-height:104px}
+    .field-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .upload-box{border:1.5px dashed #93c5fd;background:#f8fbff;border-radius:18px;padding:16px;text-align:center;margin-top:8px}
+    .upload-box input{border:0;background:transparent;padding:8px}
+    .preview-img{width:100%;max-height:260px;object-fit:contain;background:#eef2f7;border-radius:16px;margin-top:14px;display:none;border:1px solid #e2e8f0}
+    .status{background:#ecfdf5;color:#047857;padding:14px;border-radius:15px;margin:12px 0;font-weight:800;border:1px solid #bbf7d0}
+    .warning{background:#fff7ed;color:#c2410c;padding:14px;border-radius:15px;margin:12px 0;font-weight:800;border:1px solid #fed7aa}
+    .result{background:#fbfdff;border:1px solid #e2e8f0;border-radius:18px;padding:16px;margin-bottom:14px}
+    .result-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:9px}
+    .result strong{color:#1d4ed8}
+    .result p{white-space:pre-line;color:#334155;font-size:15px}
+    .copy{border:0;background:#0f172a;color:white;border-radius:10px;padding:8px 10px;font-size:12px;cursor:pointer;font-weight:800}
+    .ai-state{display:none;margin:14px 0;padding:14px;border-radius:15px;background:#eff6ff;color:#1d4ed8;font-weight:900;border:1px solid #bfdbfe}
+    .creative-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:12px}
+    .creative-card{background:white;border:1px solid #e2e8f0;border-radius:18px;padding:12px}
+    .creative-card img{width:100%;border-radius:14px;background:#f1f5f9;display:block}
+    .download{display:block;text-align:center;background:#111827;color:white;padding:10px;border-radius:12px;margin-top:10px;font-size:13px;font-weight:800}
+    .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .plan{text-align:center;position:relative}
+    .plan.featured{border:2px solid var(--blue);transform:scale(1.04)}
+    .plan ul{text-align:left;margin:18px 0 0 18px;color:#475569}
+    .plan li{margin:8px 0}
+    .price{font-size:36px;font-weight:900;color:#1d4ed8;margin:12px 0}
+    .small{font-size:13px;color:#64748b}
+    .history-item{background:#f8fafc;border-left:5px solid #2563eb;border-radius:16px;padding:15px;margin-top:12px;border-top:1px solid #e2e8f0;border-right:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0}
+    .history-item small{color:#64748b}
+    .faq{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    footer{background:#0f172a;color:#cbd5e1;padding:38px 7%;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    .toast{position:fixed;right:18px;bottom:18px;background:#0f172a;color:white;padding:14px 16px;border-radius:14px;box-shadow:0 18px 50px rgba(0,0,0,.28);display:none;z-index:99;font-weight:800}
+    .api-note{margin-top:12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:14px;color:#475569;font-size:14px}
+    @media(max-width:980px){
+      .hero,.grid-2,.grid-3,.plans,.faq{grid-template-columns:1fr}
+      h1{font-size:40px}
+      .hero{padding-top:38px}
+      nav{align-items:flex-start;flex-direction:column}
+      .nav-links{flex-wrap:wrap}
+      .plan.featured{transform:none}
+      .field-grid,.creative-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:540px){
+      section{padding:54px 5%}
+      nav{padding:22px 5%}
+      .hero{padding-left:5%;padding-right:5%}
+      h1{font-size:34px}
+      .section-title h2{font-size:28px}
+      .hero-cta .btn{width:100%}
+      .metric-row{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <div class="hero-wrap">
+      <nav>
+        <a href="#top" class="brand"><span class="logo-icon">✨</span> MarketCriativo IA</a>
+        <div class="nav-links">
+          <a href="#como-funciona">Como funciona</a>
+          <a href="#gerador">Gerador</a>
+          <a href="#planos">Planos</a>
+          <a href="#painel">Painel</a>
+        </div>
+        <div class="nav-actions">
+          <a class="btn btn-white" href="#gerador">Começar grátis</a>
+        </div>
+      </nav>
+
+      <main class="hero" id="top">
+        <div>
+          <span class="eyebrow">🚀 IA para vendedores de marketplace</span>
+          <h1>Crie anúncios profissionais para Shopee, Mercado Livre e Amazon em segundos.</h1>
+          <p>Envie a foto do produto, informe os dados principais e gere título, descrição, bullet points, CTA, palavras-chave e criativos visuais prontos para vender mais.</p>
+          <div class="hero-cta">
+            <a class="btn btn-white" href="#gerador">Gerar meu primeiro anúncio grátis</a>
+            <a class="btn btn-ghost" href="#planos">Ver planos</a>
+          </div>
+          <div class="hero-note">MVP com login, planos, limite grátis, histórico e integração preparada para IA real via Vercel Functions.</div>
+        </div>
+
+        <div class="hero-panel">
+          <div class="panel-top">
+            <h3>Prévia do criativo gerado</h3>
+            <span class="mini-badge">IA ativa</span>
+          </div>
+          <div class="fake-card"><strong>Título otimizado</strong><br>Cabo USB-C Turbo 2m Reforçado Para Carregamento Rápido</div>
+          <div class="fake-card"><strong>Descrição profissional</strong><br>Texto claro, persuasivo e estruturado para aumentar a confiança do comprador.</div>
+          <div class="fake-card"><strong>Criativo visual</strong><br>Imagem com produto centralizado, selo de oferta, benefício principal e visual limpo.</div>
+          <div class="metric-row">
+            <div class="metric"><b>3</b><span>grátis</span></div>
+            <div class="metric"><b>3</b><span>marketplaces</span></div>
+            <div class="metric"><b>IA</b><span>texto + imagem</span></div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <section id="como-funciona">
+      <div class="section-title">
+        <h2>Uma plataforma para transformar produto em anúncio completo</h2>
+        <p>O MarketCriativo IA foi pensado para quem vende online e precisa criar anúncios melhores sem perder tempo com texto, estrutura, palavras-chave e criativos.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card"><div class="icon">📦</div><h3>1. Envie o produto</h3><p>Adicione foto, nome, categoria, marca, variações, público-alvo e diferenciais do produto.</p></div>
+        <div class="card"><div class="icon">🧠</div><h3>2. A IA organiza tudo</h3><p>O sistema cria textos e ideias respeitando o formato do marketplace escolhido: Shopee, Mercado Livre ou Amazon.</p></div>
+        <div class="card"><div class="icon">📈</div><h3>3. Copie, baixe e publique</h3><p>Receba título, descrição, bullets, CTA, palavras-chave, preço psicológico e criativos visuais.</p></div>
+      </div>
+    </section>
+
+    <section class="app-zone" id="gerador">
+      <div class="section-title">
+        <h2>Gerador de anúncios com IA</h2>
+        <p>Preencha os campos, envie a imagem do produto e gere um anúncio completo. Para usar IA real, configure a chave da OpenAI no Vercel.</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h2>Informações do produto</h2>
+          <p class="small">Quanto mais detalhes você informar, melhor será o resultado gerado.</p>
+
+          <label>Foto do produto</label>
+          <div class="upload-box">
+            <input type="file" id="productImage" accept="image/*" onchange="previewImage(event)" />
+            <p class="small">PNG, JPG ou WebP. A imagem será usada para orientar o criativo visual.</p>
+          </div>
+          <img id="preview" class="preview-img" alt="Prévia da imagem do produto" />
+
+          <label>Nome do produto</label>
+          <input id="produto" placeholder="Ex: Cabo USB-C Turbo 2 Metros" />
+
+          <div class="field-grid">
+            <div>
+              <label>Marketplace</label>
+              <select id="marketplace">
+                <option>Shopee</option>
+                <option>Mercado Livre</option>
+                <option>Amazon</option>
+              </select>
+            </div>
+            <div>
+              <label>Categoria</label>
+              <input id="categoria" placeholder="Ex: Eletrônicos" />
+            </div>
+          </div>
+
+          <div class="field-grid">
+            <div><label>Marca</label><input id="marca" placeholder="Ex: Genérico, Lehmox" /></div>
+            <div><label>Cor</label><input id="cor" placeholder="Ex: Preto" /></div>
+          </div>
+
+          <div class="field-grid">
+            <div><label>Tamanho/Medida</label><input id="tamanho" placeholder="Ex: 2 metros" /></div>
+            <div><label>Quantidade</label><input id="quantidade" placeholder="Ex: Kit com 3" /></div>
+          </div>
+
+          <div class="field-grid">
+            <div><label>Material</label><input id="material" placeholder="Ex: Silicone reforçado" /></div>
+            <div><label>Público-alvo</label><input id="publico" placeholder="Ex: usuários de smartphone" /></div>
+          </div>
+
+          <label>Diferenciais do produto</label>
+          <textarea id="extras" placeholder="Ex: envio rápido, resistente, bom custo-benefício, garantia, ideal para presente..."></textarea>
+
+          <button class="btn btn-primary btn-full" onclick="gerarAnuncio()">Gerar anúncio com IA</button>
+          <button class="btn btn-dark btn-full" onclick="gerarImagemCriativa()">Gerar imagem criativa com IA</button>
+
+          <div class="api-note">Observação: se a API não estiver configurada, o sistema usa um modo demonstração local para você validar o MVP.</div>
+        </div>
+
+        <div class="card">
+          <h2>Resultado gerado</h2>
+          <div id="aiState" class="ai-state">Gerando com IA...</div>
+          <div class="result"><div class="result-head"><strong>Título otimizado</strong><button class="copy" onclick="copiar('titulo')">Copiar</button></div><p id="titulo">Seu título aparecerá aqui.</p></div>
+          <div class="result"><div class="result-head"><strong>Descrição profissional</strong><button class="copy" onclick="copiar('descricao')">Copiar</button></div><p id="descricao">A descrição aparecerá aqui.</p></div>
+          <div class="result"><div class="result-head"><strong>5 Bullet points</strong><button class="copy" onclick="copiar('bullets')">Copiar</button></div><p id="bullets">Os bullets aparecerão aqui.</p></div>
+          <div class="result"><div class="result-head"><strong>CTA de venda</strong><button class="copy" onclick="copiar('cta')">Copiar</button></div><p id="cta">O CTA aparecerá aqui.</p></div>
+          <div class="result"><div class="result-head"><strong>Palavras-chave</strong><button class="copy" onclick="copiar('keywords')">Copiar</button></div><p id="keywords">As palavras-chave aparecerão aqui.</p></div>
+          <div class="result"><div class="result-head"><strong>Ideia de imagem promocional</strong><button class="copy" onclick="copiar('imagem')">Copiar</button></div><p id="imagem">A ideia do criativo aparecerá aqui.</p></div>
+          <div class="result"><div class="result-head"><strong>Sugestão de preço psicológico</strong><button class="copy" onclick="copiar('preco')">Copiar</button></div><p id="preco">A sugestão de preço aparecerá aqui.</p></div>
+          <div class="result">
+            <div class="result-head"><strong>Imagens geradas</strong><span class="small">Download liberado após gerar</span></div>
+            <div id="creativeImages" class="creative-grid"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="painel">
+      <div class="grid-2">
+        <div class="card">
+          <h2>Acesso do usuário</h2>
+          <div id="loginStatus" class="warning">Você ainda não está logado.</div>
+          <label>Nome</label>
+          <input id="userName" placeholder="Seu nome" />
+          <label>E-mail</label>
+          <input id="userEmail" type="email" placeholder="seuemail@email.com" />
+          <button class="btn btn-primary btn-full" onclick="loginUser()">Criar conta / Entrar</button>
+          <button class="btn btn-line btn-full" onclick="logoutUser()">Sair</button>
+          <p style="margin-top:18px"><strong>Plano atual:</strong> <span id="currentPlan">Grátis</span></p>
+          <p><strong>Gerações usadas:</strong> <span id="usageCount">0</span>/<span id="usageLimit">3</span></p>
+        </div>
+        <div class="card">
+          <h2>Histórico de anúncios</h2>
+          <p class="small">Salvo neste navegador via localStorage no MVP.</p>
+          <div id="history"></div>
+          <button class="btn btn-dark btn-full" onclick="limparHistorico()">Limpar histórico</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="planos">
+      <div class="section-title">
+        <h2>Planos para validar e monetizar</h2>
+        <p>Comece oferecendo 3 gerações grátis e venda upgrades para usuários que precisam gerar anúncios recorrentes.</p>
+      </div>
+      <div class="plans">
+        <div class="card plan">
+          <span class="mini-badge">Teste</span>
+          <h3>Grátis</h3>
+          <div class="price">R$0</div>
+          <p>3 gerações para testar</p>
+          <ul><li>Texto de anúncio</li><li>Ideia de criativo</li><li>Histórico local</li></ul>
+          <button class="btn btn-line btn-full" onclick="setPlan('Grátis')">Usar grátis</button>
+        </div>
+        <div class="card plan featured">
+          <span class="mini-badge">Mais escolhido</span>
+          <h3>Básico</h3>
+          <div class="price">R$19,90</div>
+          <p>50 anúncios por mês</p>
+          <ul><li>Mais gerações</li><li>Textos por marketplace</li><li>Imagens criativas</li></ul>
+          <button class="btn btn-primary btn-full" onclick="setPlan('Básico')">Fazer upgrade</button>
+        </div>
+        <div class="card plan">
+          <span class="mini-badge">Escala</span>
+          <h3>Pro</h3>
+          <div class="price">R$99,90</div>
+          <p>Anúncios ilimitados + histórico completo</p>
+          <ul><li>Uso avançado</li><li>Mais criativos</li><li>Prioridade futura</li></ul>
+          <button class="btn btn-dark btn-full" onclick="setPlan('Pro')">Assinar Pro</button>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-title"><h2>Perguntas importantes</h2><p>O que esta versão faz agora e o que precisa ser conectado para virar SaaS real.</p></div>
+      <div class="faq">
+        <div class="card"><h3>O login é real?</h3><p>Nesta versão MVP, o login é simulado com localStorage. Para produção, use Supabase, Firebase ou Auth.js.</p></div>
+        <div class="card"><h3>O pagamento é real?</h3><p>Os planos são simulados. Para cobrar assinatura, conecte Mercado Pago, Stripe, Kiwify ou Kirvano.</p></div>
+        <div class="card"><h3>A IA é real?</h3><p>Sim, quando a variável OPENAI_API_KEY estiver configurada no Vercel. Sem ela, o sistema cai para modo demonstração.</p></div>
+        <div class="card"><h3>Gera imagem do produto?</h3><p>A função de imagem envia a foto do produto para a API e pede um criativo profissional. O resultado depende da API configurada.</p></div>
+      </div>
+    </section>
+
+    <footer>
+      <div><strong>MarketCriativo IA</strong><br><span>MicroSaaS para criação de anúncios com IA.</span></div>
+      <div>© 2026 — MVP pronto para Vercel + GitHub</div>
+    </footer>
+  </div>
+
+  <div id="toast" class="toast">Copiado!</div>
+
+  <script>
+    let user = JSON.parse(localStorage.getItem("marketUser")) || null;
+    let history = JSON.parse(localStorage.getItem("marketHistory")) || [];
+    let imageDataUrl = "";
+
+    const planLimits = { "Grátis": 3, "Básico": 50, "Pro": 999999 };
+
+    function toast(msg){
+      const el = document.getElementById("toast");
+      el.innerText = msg;
+      el.style.display = "block";
+      setTimeout(()=> el.style.display = "none", 2200);
+    }
+
+    function setLoading(active, text){
+      const el = document.getElementById("aiState");
+      el.style.display = active ? "block" : "none";
+      el.innerText = text || "Gerando com IA...";
+    }
+
+    function atualizarInterface(){
+      const status = document.getElementById("loginStatus");
+      if(user){
+        status.className = "status";
+        status.innerText = "Logado como " + user.name + " - " + user.email;
+        document.getElementById("currentPlan").innerText = user.plan;
+        document.getElementById("usageCount").innerText = user.usage;
+        document.getElementById("usageLimit").innerText = user.plan === "Pro" ? "ilimitado" : planLimits[user.plan];
+      } else {
+        status.className = "warning";
+        status.innerText = "Você ainda não está logado.";
+        document.getElementById("currentPlan").innerText = "Grátis";
+        document.getElementById("usageCount").innerText = "0";
+        document.getElementById("usageLimit").innerText = "3";
+      }
+      mostrarHistorico();
+    }
+
+    function loginUser(){
+      const name = document.getElementById("userName").value.trim() || "Usuário";
+      const email = document.getElementById("userEmail").value.trim() || "usuario@email.com";
+      const oldUser = JSON.parse(localStorage.getItem("marketUser"));
+      user = oldUser && oldUser.email === email ? oldUser : { name, email, plan:"Grátis", usage:0 };
+      user.name = name;
+      user.email = email;
+      localStorage.setItem("marketUser", JSON.stringify(user));
+      atualizarInterface();
+      toast("Conta criada/aberta com sucesso.");
+    }
+
+    function logoutUser(){
+      user = null;
+      localStorage.removeItem("marketUser");
+      atualizarInterface();
+      toast("Você saiu da conta.");
+    }
+
+    function setPlan(plan){
+      if(!user){ toast("Crie uma conta antes de escolher um plano."); return; }
+      user.plan = plan;
+      localStorage.setItem("marketUser", JSON.stringify(user));
+      atualizarInterface();
+      toast("Plano " + plan + " ativado em modo demonstração.");
+    }
+
+    function previewImage(event){
+      const file = event.target.files[0];
+      const preview = document.getElementById("preview");
+      if(!file){ return; }
+      const reader = new FileReader();
+      reader.onload = function(e){
+        imageDataUrl = e.target.result;
+        preview.src = imageDataUrl;
+        preview.style.display = "block";
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function getFormData(){
+      return {
+        produto: valor("produto", "Produto"),
+        marketplace: valor("marketplace", "Shopee"),
+        categoria: valor("categoria", "Categoria"),
+        marca: valor("marca", "Sem marca"),
+        cor: valor("cor", "cor variada"),
+        tamanho: valor("tamanho", "tamanho padrão"),
+        quantidade: valor("quantidade", "1 unidade"),
+        material: valor("material", "material resistente"),
+        publico: valor("publico", "compradores online"),
+        extras: valor("extras", "produto de qualidade, ótimo custo-benefício e ideal para uso diário"),
+        imageDataUrl
+      };
+    }
+
+    function canGenerate(){
+      if(!user){ toast("Crie uma conta grátis antes de gerar."); return false; }
+      const limit = planLimits[user.plan] || 3;
+      if(user.usage >= limit){ toast("Você atingiu o limite do plano. Faça upgrade para continuar."); return false; }
+      return true;
+    }
+
+    async function gerarAnuncio(){
+      if(!canGenerate()) return;
+      const payload = getFormData();
+      setLoading(true, "Gerando textos profissionais com IA...");
+      try{
+        const res = await fetch("/api/gerar-anuncio", {
+          method:"POST",
+          headers:{"Content-Type":"application/json"},
+          body: JSON.stringify(payload)
+        });
+        if(!res.ok){ throw new Error("API indisponível"); }
+        const data = await res.json();
+        preencherResultados(data);
+        registrarHistorico(payload, data.titulo || "Anúncio gerado");
+        toast(data.demo ? "Gerado em modo demonstração." : "Anúncio gerado com IA.");
+      }catch(err){
+        const data = gerarAnuncioLocal(payload);
+        preencherResultados(data);
+        registrarHistorico(payload, data.titulo);
+        toast("API não configurada. Usei o modo demonstração.");
+      }finally{
+        setLoading(false);
+      }
+    }
+
+    async function gerarImagemCriativa(){
+      if(!canGenerate()) return;
+      const payload = getFormData();
+      if(!payload.imageDataUrl){ toast("Envie a foto do produto antes de gerar imagem."); return; }
+      setLoading(true, "Gerando imagem criativa com IA...");
+      try{
+        const res = await fetch("/api/gerar-imagem", {
+          method:"POST",
+          headers:{"Content-Type":"application/json"},
+          body: JSON.stringify(payload)
+        });
+        if(!res.ok){ throw new Error("API indisponível"); }
+        const data = await res.json();
+        renderImages(data.images || []);
+        user.usage++;
+        localStorage.setItem("marketUser", JSON.stringify(user));
+        atualizarInterface();
+        toast(data.demo ? "Imagem simulada adicionada." : "Imagem gerada com IA.");
+      }catch(err){
+        renderImages([payload.imageDataUrl]);
+        user.usage++;
+        localStorage.setItem("marketUser", JSON.stringify(user));
+        atualizarInterface();
+        toast("API de imagem não configurada. Mostrei a imagem enviada como demonstração.");
+      }finally{
+        setLoading(false);
+      }
+    }
+
+    function gerarAnuncioLocal(d){
+      return {
+        demo:true,
+        titulo:`${d.produto} ${d.marca} ${d.quantidade} ${d.cor} ${d.tamanho} Para ${d.marketplace}`,
+        descricao:`Anúncio otimizado para ${d.marketplace}.\n\nO ${d.produto} é ideal para ${d.publico} que buscam praticidade, qualidade e bom custo-benefício. Produzido em ${d.material}, foi estruturado para apresentar valor, clareza e confiança ao comprador.\n\nInformações principais:\n- Produto: ${d.produto}\n- Marca: ${d.marca}\n- Categoria: ${d.categoria}\n- Cor: ${d.cor}\n- Tamanho/Medida: ${d.tamanho}\n- Quantidade: ${d.quantidade}\n\nDiferenciais:\n${d.extras}`,
+        bullets:`• Ideal para ${d.publico}\n• Produto com apresentação clara e foco em benefício\n• Informações objetivas para reduzir dúvidas do comprador\n• Estrutura otimizada para ${d.marketplace}\n• Chamada de venda profissional e direta`,
+        cta:`Garanta agora seu ${d.produto} e aproveite esta oportunidade antes que acabe.`,
+        keywords:`${d.produto}, ${d.categoria}, ${d.marca}, ${d.cor}, ${d.tamanho}, ${d.quantidade}, ${d.marketplace}, oferta, envio rápido, promoção, ${d.publico}`,
+        imagem:`Crie uma imagem promocional com fundo limpo, produto centralizado, selo de oferta, destaque para "${d.quantidade}", benefício principal em texto curto e visual profissional para ${d.marketplace}.`,
+        preco:`Sugestões: R$19,90, R$29,90, R$39,90, R$49,90 ou R$59,90. Use finais ,90 ou ,99 para reforçar percepção de oferta.`
+      };
+    }
+
+    function preencherResultados(data){
+      setTexto("titulo", data.titulo || "");
+      setTexto("descricao", data.descricao || "");
+      setTexto("bullets", Array.isArray(data.bullets) ? data.bullets.map(b => "• " + b).join("\n") : (data.bullets || ""));
+      setTexto("cta", data.cta || "");
+      setTexto("keywords", Array.isArray(data.keywords) ? data.keywords.join(", ") : (data.keywords || ""));
+      setTexto("imagem", data.imagem || data.ideiaImagem || "");
+      setTexto("preco", data.preco || data.precoPsicologico || "");
+    }
+
+    function registrarHistorico(payload, titulo){
+      user.usage++;
+      localStorage.setItem("marketUser", JSON.stringify(user));
+      history.unshift({ produto: payload.produto, marketplace: payload.marketplace, titulo, data: new Date().toLocaleString("pt-BR") });
+      localStorage.setItem("marketHistory", JSON.stringify(history));
+      atualizarInterface();
+    }
+
+    function renderImages(images){
+      const box = document.getElementById("creativeImages");
+      box.innerHTML = "";
+      images.forEach((src, index)=>{
+        const card = document.createElement("div");
+        card.className = "creative-card";
+        card.innerHTML = `<img src="${src}" alt="Criativo gerado ${index+1}"><a class="download" href="${src}" download="marketcriativo-criativo-${index+1}.png">Baixar imagem</a>`;
+        box.appendChild(card);
+      });
+    }
+
+    function copiar(id){
+      navigator.clipboard.writeText(document.getElementById(id).innerText);
+      toast("Texto copiado.");
+    }
+
+    function mostrarHistorico(){
+      const box = document.getElementById("history");
+      box.innerHTML = "";
+      if(history.length === 0){ box.innerHTML = "<p class='small'>Nenhum anúncio gerado ainda.</p>"; return; }
+      history.forEach(item=>{
+        const div = document.createElement("div");
+        div.className = "history-item";
+        div.innerHTML = `<strong>${item.produto}</strong><p>${item.marketplace}</p><p>${item.titulo}</p><small>${item.data}</small>`;
+        box.appendChild(div);
+      });
+    }
+
+    function limparHistorico(){
+      history = [];
+      localStorage.removeItem("marketHistory");
+      mostrarHistorico();
+      toast("Histórico limpo.");
+    }
+
+    function valor(id, padrao){
+      const el = document.getElementById(id);
+      return el && el.value ? el.value.trim() : padrao;
+    }
+
+    function setTexto(id, texto){ document.getElementById(id).innerText = texto; }
+
+    atualizarInterface();
+  </script>
+</body>
+</html>
