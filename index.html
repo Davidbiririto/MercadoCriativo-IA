@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MarketCriativo IA | Criativos profissionais para marketplace</title>
+  <style>
+    :root{
+      --bg:#070b14; --bg-soft:#0b1220; --panel:#0f172a; --panel2:#111c31;
+      --line:#25344d; --text:#f8fafc; --muted:#9fb0c7;
+      --blue:#2979ff; --cyan:#00d4ff; --green:#12c98f; --yellow:#ffbf00; --red:#ff5c5c;
+      --radius:26px; --shadow:0 28px 80px rgba(0,0,0,.36);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
+    button,input,select,textarea{font:inherit}
+    button{cursor:pointer}
+    a{text-decoration:none;color:inherit}
+    .wrap{width:min(1220px,92vw);margin:auto}
+    .nav{position:sticky;top:0;z-index:80;background:rgba(7,11,20,.82);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.08)}
+    .navin{height:76px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .logo{display:flex;align-items:center;gap:10px;font-weight:950;font-size:20px;letter-spacing:-.02em}
+    .mark{width:38px;height:38px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:grid;place-items:center;box-shadow:0 0 38px rgba(0,212,255,.34)}
+    .links{display:flex;align-items:center;gap:18px;color:var(--muted);font-size:14px;font-weight:800}
+    .links a:hover,.links button:hover{color:white}
+    .userpill{display:none;align-items:center;gap:9px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);padding:8px 10px;border-radius:999px}
+    .pill{background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff;padding:4px 10px;border-radius:999px;font-weight:900;font-size:12px}
+    .btn{border:0;border-radius:999px;padding:12px 18px;font-weight:950;color:#fff;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 14px 35px rgba(41,121,255,.28)}
+    .btn:hover{transform:translateY(-1px)}
+    .btn.secondary{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);box-shadow:none}
+    .btn.dark{background:#020617;border:1px solid #1e293b;box-shadow:none}
+    .btn.green{background:linear-gradient(135deg,var(--green),#00e0a4)}
+    .btn.red{background:linear-gradient(135deg,#ef4444,#be123c)}
+    .btn.small{padding:8px 12px;font-size:13px}
+    .btn.full{width:100%}
+
+    .hero{position:relative;overflow:hidden;padding:86px 0 90px;background:
+      radial-gradient(circle at 18% 10%,rgba(0,212,255,.18),transparent 34%),
+      radial-gradient(circle at 84% 22%,rgba(41,121,255,.23),transparent 30%),
+      linear-gradient(135deg,#070b14,#0a1b3a 62%,#092e63)}
+    .hero:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:54px 54px;mask-image:linear-gradient(to bottom,#000,transparent 82%)}
+    .hero-grid{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+    .eyebrow{display:inline-flex;gap:8px;align-items:center;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.15);padding:9px 13px;border-radius:999px;color:#dbeafe;font-weight:900;font-size:13px;margin-bottom:20px}
+    h1{font-size:clamp(38px,5.5vw,72px);line-height:1;letter-spacing:-.055em;margin-bottom:20px}
+    .hero p{font-size:18px;color:#cbd5e1;max-width:700px;margin-bottom:28px}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+    .ai-board{position:relative;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.07);border-radius:32px;padding:18px;box-shadow:var(--shadow)}
+    .ai-board-inner{background:#f8fafc;color:#0f172a;border-radius:24px;padding:18px;overflow:hidden}
+    .preview-creative{height:365px;border-radius:20px;background:
+      radial-gradient(circle at 70% 22%,#c7d2fe,transparent 28%),
+      linear-gradient(135deg,#0b5cff,#07111f);position:relative;color:white;overflow:hidden;padding:26px}
+    .preview-creative .prod{position:absolute;right:42px;top:70px;width:224px;height:224px;border-radius:30px;background:linear-gradient(135deg,#fff,#eaf2ff);box-shadow:0 25px 55px rgba(0,0,0,.35);display:grid;place-items:center;color:#0b5cff;font-weight:950;text-align:center;padding:20px}
+    .preview-creative .badge{display:inline-block;background:#ffbf00;color:#111;padding:7px 12px;border-radius:999px;font-weight:950}
+    .preview-creative h3{position:absolute;left:28px;bottom:88px;font-size:34px;letter-spacing:-.03em}
+    .preview-creative p{position:absolute;left:30px;bottom:48px;color:#dbeafe}
+
+    section{padding:78px 0}
+    .title{text-align:center;max-width:790px;margin:0 auto 38px}
+    .title h2{font-size:clamp(28px,3.5vw,44px);letter-spacing:-.035em;margin-bottom:10px}
+    .title p{color:var(--muted)}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:0 18px 55px rgba(0,0,0,.22)}
+    .card h3{font-size:20px;margin-bottom:8px}
+    .muted,.card p{color:var(--muted)}
+    .app{background:#0a1020}
+    .appgrid{display:grid;grid-template-columns:395px 1fr;gap:22px;align-items:start}
+    .panel{background:rgba(15,23,42,.92);border:1px solid var(--line);border-radius:30px;box-shadow:var(--shadow);overflow:hidden}
+    .panel-head{padding:20px 22px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02))}
+    .panel-body{padding:22px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .field{margin-bottom:14px}
+    .field label{display:block;font-weight:900;font-size:13px;margin-bottom:7px;color:#dbeafe}
+    .field input,.field select,.field textarea{width:100%;border:1px solid #334155;border-radius:15px;padding:12px 13px;background:#070b14;color:white}
+    .field input:focus,.field select:focus,.field textarea:focus{outline:2px solid rgba(0,212,255,.20);border-color:var(--cyan)}
+    .upload{border:2px dashed #475569;border-radius:20px;padding:16px;text-align:center;background:rgba(255,255,255,.03)}
+    .upload img{display:none;width:100%;max-height:260px;object-fit:contain;background:white;border-radius:16px;margin-top:12px}
+    .notice{border-radius:16px;padding:13px;margin-bottom:14px;font-weight:800}
+    .notice.warn{background:#311b08;color:#fdba74;border:1px solid #9a3412}
+    .notice.ok{background:#06291f;color:#86efac;border:1px solid #14532d}
+    .notice.info{background:#082f49;color:#93c5fd;border:1px solid #1d4ed8}
+    .notice.error{background:#3b0d0d;color:#fecaca;border:1px solid #991b1b}
+    .results{display:none}
+    .output-grid{display:grid;gap:14px}
+    .out{background:#0b1220;border:1px solid var(--line);border-radius:20px;overflow:hidden}
+    .out-title{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px 15px;background:rgba(255,255,255,.04);border-bottom:1px solid var(--line);font-weight:950}
+    .out-content{padding:15px;color:#dbeafe;white-space:pre-line}
+    .copybtn{border:1px solid #334155;background:#07111f;color:white;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:900}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{background:#0b2a5c;border:1px solid #1d4ed8;color:#bfdbfe;border-radius:999px;padding:7px 10px;font-size:13px;font-weight:800}
+    .creative-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .creative-card{background:#0b1220;border:1px solid var(--line);border-radius:24px;padding:14px}
+    .creative-card img{width:100%;border-radius:18px;border:1px solid var(--line);display:block;background:white}
+    .creative-actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+    .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .plan.hot{border:2px solid var(--cyan)}
+    .price{font-size:34px;font-weight:950;color:var(--cyan);margin:10px 0}
+
+    .showcase{position:relative;overflow:hidden;background:#080d18}
+    .showcase:before{content:"";position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(0,212,255,.20),transparent 65%);left:-130px;top:80px;animation:float 9s ease-in-out infinite}
+    .showcase:after{content:"";position:absolute;width:540px;height:540px;background:radial-gradient(circle,rgba(41,121,255,.22),transparent 68%);right:-140px;bottom:20px;animation:float 11s ease-in-out infinite reverse}
+    @keyframes float{50%{transform:translateY(-40px) translateX(30px)}}
+    .lab{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:center}
+    .motion-card{border:1px solid var(--line);background:rgba(15,23,42,.78);border-radius:30px;padding:22px;min-height:360px;position:relative;overflow:hidden}
+    .scan{position:absolute;inset:0;background:linear-gradient(120deg,transparent,rgba(0,212,255,.12),transparent);transform:translateX(-100%);animation:scan 4s linear infinite}
+    @keyframes scan{to{transform:translateX(100%)}}
+    .mock-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;position:relative}
+    .mock{height:150px;border-radius:22px;background:linear-gradient(135deg,#0b5cff,#0f172a);border:1px solid rgba(255,255,255,.14);padding:16px}
+    .mock:nth-child(2){background:linear-gradient(135deg,#f8fafc,#dbeafe);color:#0f172a}.mock:nth-child(3){background:linear-gradient(135deg,#111827,#475569)}.mock:nth-child(4){background:linear-gradient(135deg,#fff7ed,#fdba74);color:#111}
+    .mock b{display:block;margin-top:72px;font-size:18px}
+    footer{background:#020617;color:#94a3b8;padding:34px 0;text-align:center}
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.68);backdrop-filter:blur(12px);z-index:100;display:none;align-items:center;justify-content:center;padding:22px}
+    .modal.open{display:flex}
+    .box{width:min(520px,100%);background:#0f172a;border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);overflow:hidden}
+    .box.wide{width:min(920px,96vw)}
+    .box-head{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid var(--line)}
+    .box-body{padding:22px;max-height:76vh;overflow:auto}
+    .auth-tabs{display:grid;grid-template-columns:1fr 1fr}
+    .auth-tabs button{border:0;background:#0b1220;color:var(--muted);padding:14px;font-weight:950}
+    .auth-tabs button.active{background:#0f172a;color:var(--cyan)}
+    .auth-view{display:none}.auth-view.active{display:block}
+    .pw{position:relative}.pw button{position:absolute;right:8px;top:7px;border:0;background:#1e293b;color:white;border-radius:999px;padding:5px 9px}
+    .history-list{display:grid;gap:12px}.hist{border:1px solid var(--line);border-radius:18px;background:#0b1220;padding:14px}
+    .real-first{border:1px solid rgba(0,212,255,.35);box-shadow:0 0 30px rgba(0,212,255,.09)}
+    @media(max-width:980px){.hero-grid,.appgrid,.grid3,.plans,.lab{grid-template-columns:1fr}.links a{display:none}.creative-grid{grid-template-columns:1fr}}
+    @media(max-width:640px){.form-row{grid-template-columns:1fr}.navin{height:auto;padding:14px 0;align-items:flex-start}.links{justify-content:flex-end;flex-wrap:wrap}.hero{padding:54px 0}.card,.panel-body{padding:18px}.creative-grid{grid-template-columns:1fr}.mock-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="wrap navin">
+      <div class="logo"><span class="mark">AI</span> MarketCriativo IA</div>
+      <div class="links">
+        <a href="#funciona">Como funciona</a>
+        <a href="#gerador">Gerador</a>
+        <a href="#planos">Planos</a>
+        <button class="btn secondary small" id="historyBtn">Histórico</button>
+        <div id="userPill" class="userpill"><span id="userShort">Usuário</span><span id="planPill" class="pill">Grátis</span><button class="btn dark small" id="logoutBtn">Sair</button></div>
+        <button id="openAuth" class="btn small">Entrar</button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">✨ IA para copy, fotografia de produto e criativo visual</div>
+        <h1>Transforme uma foto simples em imagens profissionais para marketplace.</h1>
+        <p>A imagem enviada serve como referência do produto. A IA recria novas versões com cenário, iluminação, composição comercial e aparência de campanha.</p>
+        <div class="hero-actions"><a class="btn" href="#gerador">Gerar pacote completo</a><button class="btn secondary" id="openAuthHero">Criar conta grátis</button></div>
+      </div>
+      <div class="ai-board"><div class="ai-board-inner"><div class="preview-creative"><span class="badge">REIMAGINADO POR IA</span><div class="prod">Produto em novo cenário</div><h3>Visual de campanha</h3><p>Sem colar a foto em template simples</p></div></div></div>
+    </div>
+  </header>
+
+  <section id="funciona">
+    <div class="wrap">
+      <div class="title"><h2>Fluxo profissional para gerar criativos melhores</h2><p>Agora a plataforma separa texto, estratégia visual e geração real de imagem para não parecer template amador.</p></div>
+      <div class="grid3">
+        <div class="card"><h3>1. Referência do produto</h3><p>O usuário envia a foto para a IA entender embalagem, formato, cor e categoria.</p></div>
+        <div class="card"><h3>2. Direção de arte</h3><p>O sistema cria briefings com estilo, cenário, gancho e composição adequados ao marketplace.</p></div>
+        <div class="card"><h3>3. Imagens novas</h3><p>A IA gera versões novas do produto, em cenário profissional, sem apenas colar a foto original.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gerador" class="app">
+    <div class="wrap">
+      <div class="title"><h2>Gerador de anúncio e criativos reais por IA</h2><p>Use a foto como referência e gere imagens novas, mais bonitas e mais comerciais.</p></div>
+      <div id="statusBox" class="notice warn">Faça login para gerar seus criativos. O plano grátis libera 3 gerações.</div>
+
+      <div class="appgrid">
+        <aside class="panel">
+          <div class="panel-head"><h3>Informações do produto</h3><p class="muted">Quanto mais contexto, melhor a copy e a direção visual.</p></div>
+          <div class="panel-body">
+            <div class="field upload"><label>Imagem de referência do produto</label><input type="file" id="productImage" accept="image/*"><img id="imgPreview"><p class="muted" style="font-size:13px;margin-top:8px">A imagem é usada como referência. A IA deve recriar novas cenas, não colar essa foto em um fundo.</p></div>
+            <div class="field"><label>Nome do produto *</label><input id="produto" placeholder="Ex: Perfume Lattafa Asad 100ml"></div>
+            <div class="form-row">
+              <div class="field"><label>Marketplace</label><select id="marketplace"><option>Shopee</option><option>Mercado Livre</option><option>Amazon</option></select></div>
+              <div class="field"><label>Categoria</label><input id="categoria" placeholder="Ex: Perfume"></div>
+            </div>
+            <div class="form-row">
+              <div class="field"><label>Marca</label><input id="marca" placeholder="Ex: Lattafa"></div>
+              <div class="field"><label>Quantidade</label><input id="quantidade" placeholder="Ex: 1 unidade"></div>
+            </div>
+            <div class="form-row">
+              <div class="field"><label>Cor/variação</label><input id="cor" placeholder="Ex: Preto e dourado"></div>
+              <div class="field"><label>Tamanho/medida</label><input id="tamanho" placeholder="Ex: 100ml"></div>
+            </div>
+            <div class="field"><label>Material/composição</label><input id="material" placeholder="Ex: vidro, embalagem preta e dourada"></div>
+            <div class="field"><label>Público-alvo</label><input id="publico" placeholder="Ex: Homens, mulheres, mães, gamers"></div>
+            <div class="form-row">
+              <div class="field"><label>Objetivo do criativo</label><select id="objetivo"><option>Reimaginar produto profissionalmente</option><option>Estúdio clean minimalista</option><option>Lifestyle premium</option><option>Vitrine / superfície elegante</option><option>Oferta sofisticada</option><option>Catálogo e-commerce</option></select></div>
+              <div class="field"><label>Estilo visual</label><select id="estilo"><option>Premium e elegante</option><option>Apple minimalista</option><option>Marketplace clean</option><option>Luxo escuro</option><option>Lifestyle sofisticado</option><option>Alta conversão sem poluição</option></select></div>
+            </div>
+            <div class="field"><label>Diferenciais e restrições</label><textarea id="diferenciais" rows="3" placeholder="Ex: fragrância intensa, visual premium. Não inventar frete grátis, desconto ou certificações."></textarea></div>
+            <button class="btn green full real-first" id="generateFullAIBtn">🚀 Gerar pacote completo com IA real</button>
+            <button class="btn secondary full" id="generateTextBtn" style="margin-top:10px">📝 Gerar somente textos e briefing</button>
+            <button class="btn dark full" id="generateDraftBtn" style="margin-top:10px">⚡ Gerar rascunho visual local</button>
+            <p class="muted" style="font-size:13px;margin-top:10px">O rascunho local é apenas fallback. O resultado profissional vem da geração real por IA.</p>
+          </div>
+        </aside>
+
+        <main class="panel">
+          <div class="panel-head"><h3>Resultado organizado</h3><p class="muted">Imagens, títulos, descrição, CTAs e palavras-chave separados para uso.</p></div>
+          <div class="panel-body">
+            <div id="loading" class="notice info" style="display:none">Gerando pacote profissional com IA. Imagens podem levar de 30 a 90 segundos...</div>
+            <div id="emptyState" class="notice info">Preencha o produto, envie a imagem de referência e clique em gerar.</div>
+            <div id="results" class="results"></div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </section>
+
+  <section class="showcase">
+    <div class="wrap lab">
+      <div>
+        <div class="eyebrow">🧠 Laboratório visual do MarketCriativo</div>
+        <h2 style="font-size:clamp(30px,3.8vw,50px);letter-spacing:-.04em;margin-bottom:14px">Criativos com aparência de campanha, não apenas uma foto colada.</h2>
+        <p class="muted">A imagem enviada guia a IA sobre o produto. O resultado ideal deve parecer fotografia publicitária: cenário, luz, composição, mockup e valor percebido.</p>
+      </div>
+      <div class="motion-card">
+        <div class="scan"></div>
+        <div class="mock-grid">
+          <div class="mock"><span class="pill">Studio</span><b>Clean premium</b></div>
+          <div class="mock"><span class="pill">Lifestyle</span><b>Cenário real</b></div>
+          <div class="mock"><span class="pill">Vitrine</span><b>Superfície elegante</b></div>
+          <div class="mock"><span class="pill">Oferta</span><b>Sem poluição</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="planos">
+    <div class="wrap">
+      <div class="title"><h2>Planos</h2><p>Comece grátis e faça upgrade quando validar o valor para vendedores.</p></div>
+      <div class="plans">
+        <div class="card plan"><h3>Grátis</h3><div class="price">R$0</div><p>3 gerações para testar.</p><button class="btn secondary planBtn" data-plan="free">Usar grátis</button></div>
+        <div class="card plan hot"><span class="pill">Mais indicado</span><h3>Básico</h3><div class="price">R$19,90</div><p>50 gerações mensais.</p><button class="btn planBtn" data-plan="basico">Ativar Básico</button></div>
+        <div class="card plan"><h3>Pro</h3><div class="price">R$99,90</div><p>Gerações ilimitadas + histórico completo.</p><button class="btn dark planBtn" data-plan="pro">Ativar Pro</button></div>
+      </div>
+    </div>
+  </section>
+
+  <footer><div class="wrap">© 2026 MarketCriativo IA — MVP profissional para anúncios e criativos de marketplace.</div></footer>
+
+  <div class="modal" id="authModal">
+    <div class="box">
+      <div class="auth-tabs"><button id="tabLogin" class="active">Entrar</button><button id="tabSignup">Criar conta</button></div>
+      <div class="box-body">
+        <div id="loginView" class="auth-view active">
+          <div class="field"><label>E-mail</label><input id="loginEmail" type="email"></div>
+          <div class="field pw"><label>Senha</label><input id="loginPass" type="password"><button type="button" data-toggle="loginPass">ver</button></div>
+          <button class="btn full" id="loginBtn">Entrar</button>
+          <p class="muted" style="font-size:13px;margin-top:12px">MVP demonstrativo: conta salva localmente no navegador.</p>
+        </div>
+        <div id="signupView" class="auth-view">
+          <div class="field"><label>Nome</label><input id="signupName"></div>
+          <div class="field"><label>E-mail</label><input id="signupEmail" type="email"></div>
+          <div class="field pw"><label>Senha</label><input id="signupPass" type="password"><button type="button" data-toggle="signupPass">ver</button></div>
+          <button class="btn full" id="signupBtn">Criar conta grátis</button>
+        </div>
+        <button class="btn secondary full" id="closeAuth" style="margin-top:12px">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="historyModal">
+    <div class="box wide">
+      <div class="box-head"><h3>Histórico de criativos</h3><button class="btn secondary small" id="closeHistory">Fechar</button></div>
+      <div class="box-body"><div id="history" class="history-list"></div><button id="clearHistory" class="btn secondary" style="margin-top:16px">Limpar histórico</button></div>
+    </div>
+  </div>
+
+<script>
+const $=id=>document.getElementById(id);
+let users=JSON.parse(localStorage.getItem('mc_users')||'[]');
+let session=JSON.parse(localStorage.getItem('mc_session')||'null');
+let currentPlan=localStorage.getItem('mc_plan')||'free';
+let usage=parseInt(localStorage.getItem('mc_usage')||'0',10);
+let history=JSON.parse(localStorage.getItem('mc_history')||'[]');
+let uploadedImage=null, lastResult=null, lastImages=[];
+
+function save(){localStorage.setItem('mc_users',JSON.stringify(users));localStorage.setItem('mc_session',JSON.stringify(session));localStorage.setItem('mc_plan',currentPlan);localStorage.setItem('mc_usage',String(usage));localStorage.setItem('mc_history',JSON.stringify(history))}
+function limit(){return currentPlan==='pro'?999999:currentPlan==='basico'?50:3}
+function canGenerate(){return usage<limit()}
+function escapeHtml(s=''){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function copyText(t){navigator.clipboard.writeText(t);alert('Copiado!')}
+function openAuth(mode='login'){$('authModal').classList.add('open');setAuthMode(mode)}
+function setAuthMode(mode){$('tabLogin').classList.toggle('active',mode==='login');$('tabSignup').classList.toggle('active',mode==='signup');$('loginView').classList.toggle('active',mode==='login');$('signupView').classList.toggle('active',mode==='signup')}
+function updateUI(){
+  $('openAuth').style.display=session?'none':'inline-block';
+  $('userPill').style.display=session?'flex':'none';
+  if(session){$('userShort').textContent=session.name.split(' ')[0];$('planPill').textContent=currentPlan==='free'?'Grátis':currentPlan==='basico'?'Básico':'Pro'}
+  $('statusBox').className='notice '+(session?(canGenerate()?'ok':'warn'):'warn');
+  $('statusBox').textContent=session?`Logado como ${session.name}. Plano ${$('planPill').textContent}. Uso: ${usage}/${limit()}.`:'Faça login para gerar seus criativos. O plano grátis libera 3 gerações.';
+  renderHistory();
+}
+$('openAuth').onclick=()=>openAuth('login');$('openAuthHero').onclick=()=>openAuth('signup');$('closeAuth').onclick=()=>$('authModal').classList.remove('open');$('tabLogin').onclick=()=>setAuthMode('login');$('tabSignup').onclick=()=>setAuthMode('signup');
+document.querySelectorAll('[data-toggle]').forEach(b=>b.onclick=()=>{const i=$(b.dataset.toggle);i.type=i.type==='password'?'text':'password'});
+$('signupBtn').onclick=()=>{const name=$('signupName').value.trim(),email=$('signupEmail').value.trim().toLowerCase(),pass=$('signupPass').value;if(!name||!email||!pass)return alert('Preencha nome, e-mail e senha.');if(users.some(u=>u.email===email))return alert('Esse e-mail já possui conta.');users.push({name,email,pass});session={name,email};$('authModal').classList.remove('open');save();updateUI();alert('Conta criada com sucesso!')};
+$('loginBtn').onclick=()=>{const email=$('loginEmail').value.trim().toLowerCase(),pass=$('loginPass').value;const u=users.find(x=>x.email===email&&x.pass===pass);if(!u)return alert('E-mail ou senha inválidos.');session={name:u.name,email:u.email};$('authModal').classList.remove('open');save();updateUI()};
+$('logoutBtn').onclick=()=>{session=null;save();updateUI()};
+document.querySelectorAll('.planBtn').forEach(b=>b.onclick=()=>{currentPlan=b.dataset.plan;save();updateUI();alert('Plano ativado em modo demonstração.')});
+$('historyBtn').onclick=()=>{$('historyModal').classList.add('open');renderHistory()};$('closeHistory').onclick=()=>$('historyModal').classList.remove('open');
+
+function compressImage(file){
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=e=>{
+      const img=new Image();
+      img.onload=()=>{
+        const max=1200;
+        const scale=Math.min(max/img.width,max/img.height,1);
+        const canvas=document.createElement('canvas');
+        canvas.width=Math.round(img.width*scale); canvas.height=Math.round(img.height*scale);
+        const ctx=canvas.getContext('2d');
+        ctx.drawImage(img,0,0,canvas.width,canvas.height);
+        resolve(canvas.toDataURL('image/jpeg',0.86));
+      };
+      img.onerror=reject; img.src=e.target.result;
+    };
+    reader.onerror=reject; reader.readAsDataURL(file);
+  });
+}
+$('productImage').onchange=async e=>{
+  const f=e.target.files[0]; if(!f)return;
+  uploadedImage=await compressImage(f);
+  $('imgPreview').src=uploadedImage; $('imgPreview').style.display='block';
+};
+
+function formData(){return{produto:$('produto').value.trim(),marketplace:$('marketplace').value,categoria:$('categoria').value.trim(),marca:$('marca').value.trim(),quantidade:$('quantidade').value.trim(),cor:$('cor').value.trim(),tamanho:$('tamanho').value.trim(),material:$('material').value.trim(),publico:$('publico').value.trim(),objetivo:$('objetivo').value,estilo:$('estilo').value,diferenciais:$('diferenciais').value.trim(),imageBase64:uploadedImage||''}}
+
+function fallbackResult(d){
+ const p=d.produto||'Produto',m=d.marketplace,marca=d.marca||'',qty=d.quantidade||'',publ=d.publico||'compradores online',dif=d.diferenciais||'boa apresentação e ótimo custo-benefício';
+ return{titulos:[`${p} ${marca} ${qty} ${d.tamanho||''} ${d.cor||''}`.trim(),`${p} ${qty} - Ideal para ${publ}`,`${p} ${marca} com apresentação profissional`.trim(),`${p} para ${m} | Anúncio otimizado`],descricao:`O ${p} é uma opção indicada para ${publ}. Este anúncio foi estruturado para apresentar o produto com clareza, foco em benefícios e linguagem adequada para ${m}.\n\nPrincipais informações:\nProduto: ${p}\nMarca: ${marca||'não informada'}\nQuantidade: ${qty||'não informada'}\nCategoria: ${d.categoria||'não informada'}\n\nDiferenciais: ${dif}\n\nUse as informações de forma fiel ao produto e evite promessas que não estejam comprovadas.`,bullets:[`Ideal para ${publ}`,`Informações claras para reduzir dúvidas do comprador`,`Apresentação profissional para ${m}`,`Destaque para ${dif}`,`Texto pronto para copiar e publicar`],ctas:[`Garanta agora seu ${p} e aproveite esta oportunidade.`,`Clique em comprar e finalize seu pedido com praticidade.`,`Adicione ao carrinho e confira as condições disponíveis.`],palavrasChave:[p,d.categoria,marca,d.cor,d.tamanho,qty,m,'oferta','produto online'].filter(Boolean),precosPsicologicos:['R$ 19,90','R$ 29,90','R$ 49,90'],checklistMarketplace:[`Título com produto + marca + atributos`,`Descrição fiel ao produto informado`,`Sem promessas não comprovadas`],briefingsImagem:[{nome:'Studio clean',headline:'Imagem clean premium',subheadline:'Produto em superfície clara e iluminação elegante',layout:'fotografia de produto em estúdio, fundo neutro, sem texto'},{nome:'Lifestyle premium',headline:'Cenário aspiracional',subheadline:'Produto em ambiente sofisticado e coerente com o nicho',layout:'cena lifestyle, decoração elegante, sem texto'},{nome:'Vitrine elegante',headline:'Visual de catálogo',subheadline:'Produto em balcão, estante ou superfície refinada',layout:'mockup de vitrine, profundidade, luz profissional, sem texto'},{nome:'Oferta sofisticada',headline:'Criativo comercial limpo',subheadline:'Produto valorizado com elementos gráficos discretos',layout:'anúncio clean sem blocos grandes, sem texto excessivo'}]}
+}
+async function generateAd(d){
+ try{const r=await fetch('/api/gerar-anuncio',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});const data=await r.json();if(!r.ok||data.fallback)throw new Error(data.error||'fallback');return data}catch(e){return fallbackResult(d)}
+}
+async function generateRealImages(d,briefings){
+ const r=await fetch('/api/gerar-imagem',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...d,briefings})});
+ const data=await r.json();
+ if(!r.ok)throw new Error(data.error||'Erro ao gerar imagens reais.');
+ if(!data.images?.length)throw new Error('Nenhuma imagem retornada pela IA.');
+ return data.images;
+}
+
+function drawRound(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function wrapText(ctx,text,x,y,maxWidth,lineHeight){const words=String(text).split(' ');let line='';for(const w of words){const test=line+w+' ';if(ctx.measureText(test).width>maxWidth&&line){ctx.fillText(line,x,y);line=w+' ';y+=lineHeight}else line=test}ctx.fillText(line,x,y)}
+function loadImg(src){return new Promise(res=>{if(!src)return res(null);const img=new Image();img.onload=()=>res(img);img.onerror=()=>res(null);img.src=src})}
+async function makeDraftCreative(d,b,i){
+ const canvas=document.createElement('canvas'),ctx=canvas.getContext('2d');canvas.width=1080;canvas.height=1080;const img=await loadImg(uploadedImage);
+ const styles=[['#f8fafc','#dbeafe','#0057ff'],['#111827','#475569','#13c58b'],['#fff7ed','#fdba74','#ea580c'],['#0057ff','#051b49','#ffbf00']][i];
+ const g=ctx.createLinearGradient(0,0,1080,1080);g.addColorStop(0,styles[0]);g.addColorStop(1,styles[1]);ctx.fillStyle=g;ctx.fillRect(0,0,1080,1080);
+ ctx.fillStyle='rgba(255,255,255,.92)';drawRound(ctx,135,160,810,520,40);ctx.fill();ctx.shadowColor='rgba(0,0,0,.24)';ctx.shadowBlur=30;ctx.shadowOffsetY=18;
+ if(img){const scale=Math.min(680/img.width,390/img.height);const w=img.width*scale,h=img.height*scale;ctx.drawImage(img,540-w/2,420-h/2,w,h)}
+ ctx.shadowColor='transparent';ctx.fillStyle=styles[2];drawRound(ctx,70,70,235,58,29);ctx.fill();ctx.fillStyle='white';ctx.font='900 26px Arial';ctx.textAlign='center';ctx.fillText('RASCUNHO',188,107);
+ ctx.textAlign='left';ctx.fillStyle=i===0||i===2?'#0f172a':'#fff';ctx.font='900 58px Arial';wrapText(ctx,b?.headline||'Prévia visual',90,790,760,64);
+ ctx.font='700 29px Arial';ctx.fillStyle=i===0||i===2?'#475569':'#dbeafe';wrapText(ctx,b?.subheadline||d.produto,92,910,720,36);
+ return canvas.toDataURL('image/png');
+}
+async function makeDrafts(d,data){const briefs=data.briefingsImagem||[];return Promise.all([0,1,2,3].map(i=>makeDraftCreative(d,briefs[i],i)))}
+
+function block(title,content){return`<div class="out"><div class="out-title"><span>${title}</span><button class="copybtn" onclick="copyText(\`${String(content).replace(/`/g,'\\`')}\`)">Copiar</button></div><div class="out-content">${escapeHtml(content)}</div></div>`}
+function renderResult(data,images=[],imageType='real'){
+ lastResult=data; lastImages=images; $('emptyState').style.display='none'; $('results').style.display='block';
+ const titles=data.titulos||[],bullets=data.bullets||[],ctas=data.ctas||[],keywords=data.palavrasChave||[],prices=data.precosPsicologicos||[],check=data.checklistMarketplace||[];
+ const imageTitle=imageType==='real'?'🎨 Imagens profissionais geradas por IA':'⚡ Rascunhos locais de prévia';
+ const imageNote=imageType==='real'?'Imagens recriadas a partir da referência do produto.':'Rascunho local: não é o resultado final profissional.';
+ const imgHTML=images.length?`<div class="out"><div class="out-title"><span>${imageTitle}</span><button class="copybtn" onclick="copyText('${escapeHtml(imageNote)}')">Info</button></div><div class="out-content"><p class="muted" style="margin-bottom:12px">${imageNote}</p><div class="creative-grid">${images.map((src,i)=>`<div class="creative-card"><img src="${src}"><div class="creative-actions"><button class="btn green small" onclick="downloadImage(${i})">Baixar ${i+1}</button></div></div>`).join('')}</div></div></div>`:'';
+ $('results').innerHTML=`<div class="output-grid">${imgHTML}${block('📌 4 opções de títulos',titles.map((t,i)=>`${i+1}. ${t}`).join('\n'))}${block('📝 Descrição profissional',data.descricao||'')}${block('🔹 Bullet points',bullets.map(b=>'• '+b).join('\n'))}${block('🎯 CTAs de venda',ctas.map((c,i)=>`${i+1}. ${c}`).join('\n'))}<div class="out"><div class="out-title"><span>🏷️ Palavras-chave</span><button class="copybtn" onclick="copyText('${escapeHtml(keywords.join(', '))}')">Copiar</button></div><div class="out-content"><div class="chips">${keywords.map(k=>`<span class="chip">${escapeHtml(k)}</span>`).join('')}</div></div></div>${block('💰 Preços psicológicos',prices.join(' | '))}${block('✅ Checklist do marketplace',check.map(c=>'• '+c).join('\n'))}${block('🖼️ Briefings profissionais de imagem',(data.briefingsImagem||[]).map(b=>`${b.nome}: ${b.headline}\n${b.subheadline}\nDireção: ${b.layout}`).join('\n\n'))}</div>`;
+}
+function downloadImage(i){const a=document.createElement('a');a.href=lastImages[i];a.download=`marketcriativo-imagem-${i+1}.png`;a.click()}
+async function execute(mode){
+ if(!session)return openAuth('signup');
+ if(!canGenerate())return alert('Limite do plano atingido. Faça upgrade.');
+ const d=formData(); if(!d.produto)return alert('Informe o nome do produto.');
+ if((mode==='full'||mode==='images')&&!uploadedImage)return alert('Envie uma imagem de referência do produto.');
+ $('loading').style.display='block'; $('loading').className='notice info';
+ try{
+   const data=lastResult && mode==='images'?lastResult:await generateAd(d);
+   let imgs=[];
+   if(mode==='full'||mode==='images'){imgs=await generateRealImages(d,data.briefingsImagem||[]); renderResult(data,imgs,'real')}
+   else if(mode==='draft'){imgs=await makeDrafts(d,data); renderResult(data,imgs,'draft')}
+   else renderResult(data,[],'text');
+   usage++; history.unshift({produto:d.produto,marketplace:d.marketplace,date:new Date().toLocaleString('pt-BR'),title:(data.titulos||[])[0]||d.produto}); history=history.slice(0,25); save(); updateUI();
+ }catch(e){
+   $('loading').className='notice error'; $('loading').textContent='Erro: '+e.message;
+   if(mode==='full'||mode==='images'){alert('A geração real de imagem falhou: '+e.message+'. Verifique OPENAI_API_KEY, créditos e logs do Vercel.')}
+ }finally{setTimeout(()=>{$('loading').style.display='none'},1600)}
+}
+$('generateFullAIBtn').onclick=()=>execute('full');
+$('generateTextBtn').onclick=()=>execute('text');
+$('generateDraftBtn').onclick=()=>execute('draft');
+
+function renderHistory(){const box=$('history');if(!history.length){box.innerHTML='<p class="muted">Nenhum anúncio gerado ainda.</p>';return}box.innerHTML=history.map(h=>`<div class="hist"><b>${escapeHtml(h.produto)}</b><br><span class="muted">${escapeHtml(h.marketplace)} • ${escapeHtml(h.date)}</span><br><span>${escapeHtml(h.title||'')}</span></div>`).join('')}
+$('clearHistory').onclick=()=>{history=[];save();renderHistory()};
+updateUI();
+</script>
+</body>
+</html>
