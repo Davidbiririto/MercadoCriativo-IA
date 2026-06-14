@@ -21,35 +21,22 @@
         :root {
             --primary: #0A2647;
             --primary-dark: #051b34;
-            --primary-light: #e8f0fe;
             --secondary: #2C7DA0;
-            --secondary-light: #61a5c2;
             --accent: #FFB703;
-            --accent-dark: #FB8500;
             --success: #10b981;
             --gray-50: #f8fafc;
             --gray-100: #f1f5f9;
             --gray-200: #e2e8f0;
-            --gray-300: #cbd5e1;
             --gray-600: #475569;
             --gray-700: #334155;
             --gray-900: #0f172a;
-            --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1);
             --shadow-md: 0 4px 6px -4px rgb(0 0 0 / 0.1), 0 10px 15px -3px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-            --shadow-xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-            --radius-sm: 0.5rem;
+            --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1);
             --radius-md: 0.75rem;
             --radius-lg: 1rem;
             --radius-xl: 1.5rem;
             --radius-2xl: 2rem;
-        }
-
-        .glass {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
         }
 
         .container {
@@ -59,11 +46,10 @@
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 0 1.25rem;
-            }
+            .container { padding: 0 1.25rem; }
         }
 
+        /* Navbar */
         .navbar {
             position: sticky;
             top: 0;
@@ -71,15 +57,15 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(8px);
             border-bottom: 1px solid var(--gray-200);
+            padding: 1rem 0;
         }
 
         .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 0;
-            gap: 1.5rem;
             flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .logo {
@@ -89,7 +75,6 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            letter-spacing: -0.02em;
             cursor: pointer;
         }
 
@@ -103,30 +88,19 @@
         .nav-links a {
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.95rem;
             color: var(--gray-700);
-            transition: all 0.2s;
-            position: relative;
+            transition: color 0.2s;
         }
 
-        .nav-links a:hover {
-            color: var(--secondary);
-        }
+        .nav-links a:hover { color: var(--secondary); }
 
         .user-info {
             display: flex;
             align-items: center;
             gap: 0.75rem;
             background: var(--gray-100);
-            padding: 0.4rem 1rem 0.4rem 1.2rem;
+            padding: 0.4rem 1rem;
             border-radius: 100px;
-            border: 1px solid var(--gray-200);
-        }
-
-        .user-email {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--gray-900);
         }
 
         .badge-plan {
@@ -140,12 +114,10 @@
 
         .btn-sm {
             background: transparent;
-            border: 1px solid var(--gray-300);
+            border: 1px solid var(--gray-200);
             padding: 0.3rem 0.9rem;
             border-radius: 100px;
             cursor: pointer;
-            font-weight: 500;
-            font-size: 0.8rem;
         }
 
         .btn-primary {
@@ -155,16 +127,11 @@
             padding: 0.875rem 2rem;
             border-radius: 100px;
             font-weight: 600;
-            font-size: 1rem;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
+        .btn-primary:hover { transform: translateY(-2px); }
 
         .btn-outline {
             background: transparent;
@@ -176,17 +143,16 @@
             cursor: pointer;
         }
 
+        /* Hero */
         .hero {
             background: linear-gradient(135deg, #f7f9fc 0%, #eef2fa 100%);
-            padding: 5rem 0 6rem;
-            position: relative;
+            padding: 5rem 0;
         }
 
         .hero h1 {
             font-size: 3.5rem;
             font-weight: 800;
-            line-height: 1.2;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -197,33 +163,26 @@
             font-size: 1.2rem;
             color: var(--gray-600);
             margin-bottom: 2rem;
+            max-width: 600px;
         }
 
-        .section {
-            padding: 5rem 0;
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
         }
 
-        .section-alt {
-            background: var(--gray-50);
-        }
-
+        .section { padding: 5rem 0; }
+        .section-alt { background: var(--gray-50); }
         .section-title {
             font-size: 2.5rem;
             font-weight: 800;
             text-align: center;
-            margin-bottom: 1rem;
-            color: var(--gray-900);
+            margin-bottom: 3rem;
         }
 
-        .section-subtitle {
-            text-align: center;
-            color: var(--gray-600);
-            margin: 0 auto 3rem;
-        }
-
+        /* Steps */
         .steps-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
         }
 
@@ -236,17 +195,12 @@
             border: 1px solid var(--gray-200);
         }
 
-        .step-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-        }
-
+        /* Form */
         .form-card {
             background: white;
             border-radius: var(--radius-2xl);
-            box-shadow: var(--shadow-xl);
+            box-shadow: var(--shadow-lg);
             padding: 2.5rem;
-            border: 1px solid var(--gray-200);
         }
 
         .two-columns {
@@ -255,15 +209,11 @@
             gap: 2rem;
         }
 
-        .form-group {
-            margin-bottom: 1.25rem;
-        }
-
+        .form-group { margin-bottom: 1.25rem; }
         .form-group label {
             font-weight: 600;
             display: block;
             margin-bottom: 0.5rem;
-            color: var(--gray-700);
         }
 
         input, select, textarea {
@@ -272,14 +222,11 @@
             border-radius: var(--radius-md);
             border: 1.5px solid var(--gray-200);
             font-family: inherit;
-            font-size: 0.95rem;
-            transition: all 0.2s;
         }
 
         input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: var(--secondary);
-            box-shadow: 0 0 0 3px rgba(44,125,160,0.1);
         }
 
         .image-preview {
@@ -288,12 +235,12 @@
             max-height: 200px;
             border-radius: var(--radius-lg);
             object-fit: cover;
-            border: 2px solid var(--gray-200);
         }
 
+        /* Planos */
         .plans-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
         }
 
@@ -305,10 +252,7 @@
             position: relative;
         }
 
-        .plan-card.popular {
-            border: 2px solid var(--accent);
-        }
-
+        .plan-card.popular { border: 2px solid var(--accent); }
         .plan-badge {
             position: absolute;
             top: -12px;
@@ -342,39 +286,25 @@
             color: white;
         }
 
-        /* Criativo Visual - Área de resultado com imagem gerada */
+        /* Resultado com imagem gerada */
         .result-area {
             background: linear-gradient(135deg, #f8fafc, #ffffff);
             border-radius: var(--radius-xl);
             padding: 2rem;
             margin-top: 2rem;
-            border: 1px solid var(--gray-200);
         }
 
         .creative-display {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .generated-image {
-            background: #1a1a2e;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
         }
 
         .generated-image canvas {
             width: 100%;
             height: auto;
-            display: block;
-        }
-
-        .image-actions {
-            margin-top: 1rem;
-            display: flex;
-            gap: 1rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
         }
 
         .btn-download {
@@ -384,12 +314,7 @@
             padding: 0.5rem 1rem;
             border-radius: 100px;
             cursor: pointer;
-            font-weight: 600;
-        }
-
-        .copy-texts {
-            max-height: 400px;
-            overflow-y: auto;
+            margin-top: 1rem;
         }
 
         .result-block {
@@ -438,7 +363,8 @@
             text-align: center;
         }
 
-        #loginModal {
+        /* Modal */
+        .modal {
             display: none;
             position: fixed;
             top: 0;
@@ -461,15 +387,8 @@
         }
 
         @media (max-width: 768px) {
-            .two-columns, .creative-display {
-                grid-template-columns: 1fr;
-            }
-            .hero h1 {
-                font-size: 2rem;
-            }
-            .section-title {
-                font-size: 1.8rem;
-            }
+            .two-columns, .creative-display { grid-template-columns: 1fr; }
+            .section-title { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -477,7 +396,7 @@
 
 <div class="navbar">
     <div class="container nav-container">
-        <div class="logo" onclick="scrollToTop()">MarketCriativo IA</div>
+        <div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">MarketCriativo IA</div>
         <div class="nav-links">
             <a href="#como-funciona">Como funciona</a>
             <a href="#gerador">Gerador</a>
@@ -493,14 +412,15 @@
     </div>
 </div>
 
-<div id="loginModal">
+<!-- Modal de Login -->
+<div id="loginModal" class="modal">
     <div class="modal-content">
-        <h3 style="margin-bottom:1rem;">✨ Comece a vender mais</h3>
-        <input type="text" id="loginName" placeholder="Seu nome" style="margin-bottom:1rem;">
-        <input type="email" id="loginEmail" placeholder="Seu e-mail" style="margin-bottom:1rem;">
-        <button id="confirmLoginBtn" class="btn-primary" style="width:100%; margin-bottom:0.75rem;">Criar conta grátis</button>
+        <h3 style="margin-bottom:1rem;">✨ Criar conta grátis</h3>
+        <input type="text" id="loginName" placeholder="Seu nome" style="width:100%; margin-bottom:1rem;">
+        <input type="email" id="loginEmail" placeholder="Seu e-mail" style="width:100%; margin-bottom:1rem;">
+        <button id="confirmLoginBtn" class="btn-primary" style="width:100%; margin-bottom:0.75rem;">Criar conta</button>
         <button id="closeModalBtn" class="btn-outline" style="width:100%;">Cancelar</button>
-        <p style="font-size:0.7rem; margin-top:1rem; text-align:center;">✅ MVP demonstrativo</p>
+        <p style="font-size:0.7rem; margin-top:1rem; text-align:center;">✅ MVP demonstrativo - Dados salvos localmente</p>
     </div>
 </div>
 
@@ -508,7 +428,7 @@
     <section class="hero">
         <div class="container">
             <h1>Crie anúncios profissionais com imagens geradas por IA</h1>
-            <p>Envie a foto do produto, preencha os dados e receba um criativo visual completo + copy pronta para vender</p>
+            <p>Envie a foto do produto e receba um criativo visual completo + copy pronta para vender</p>
             <button id="heroCtaBtn" class="btn-primary">🚀 Gerar meu primeiro anúncio</button>
         </div>
     </section>
@@ -534,17 +454,19 @@
                         <div class="form-group"><label>📸 Imagem do produto</label><input type="file" id="productImage" accept="image/*"></div>
                         <div class="form-group"><label>🏷️ Nome do produto</label><input type="text" id="prodName" placeholder="Ex: Perfume Lattafa Asad"></div>
                         <div class="form-group"><label>🛒 Marketplace</label><select id="marketplace"><option>Shopee</option><option>Mercado Livre</option><option>Amazon</option></select></div>
-                        <div class="form-group"><label>📂 Categoria</label><input id="category" placeholder="Ex: Perfume, Eletrônicos"></div>
+                        <div class="form-group"><label>📂 Categoria</label><input id="category" placeholder="Ex: Perfume"></div>
                         <div class="form-group"><label>🏢 Marca</label><input id="brand" placeholder="Marca"></div>
                         <div class="form-group"><label>🎨 Cor</label><input id="color" placeholder="Cor"></div>
-                        <div class="form-group"><label>📏 Tamanho</label><input id="size" placeholder="Tamanho/Medida"></div>
+                        <div class="form-group"><label>📏 Tamanho</label><input id="size" placeholder="Tamanho"></div>
                         <div class="form-group"><label>📦 Quantidade</label><input id="quantity" placeholder="Quantidade"></div>
                         <div class="form-group"><label>👥 Público-alvo</label><input id="target" placeholder="Ex: Homens, Mulheres"></div>
                         <div class="form-group"><label>⭐ Diferenciais</label><textarea id="differentials" rows="2" placeholder="Diferenciais do produto"></textarea></div>
                         <button id="generateBtn" class="btn-primary" style="width:100%">✨ Gerar criativo completo</button>
                     </div>
                     <div>
-                        <div id="imagePreviewArea"><img id="imgPreview" class="image-preview" style="display:none;"></div>
+                        <div id="imagePreviewArea">
+                            <img id="imgPreview" class="image-preview" style="display:none;">
+                        </div>
                         <div id="limitMessage" class="alert-demo" style="display:none;"></div>
                     </div>
                 </div>
@@ -555,7 +477,7 @@
 
     <section id="planos" class="section">
         <div class="container">
-            <h2 class="section-title">💰 Planos que cabem no seu bolso</h2>
+            <h2 class="section-title">💰 Planos</h2>
             <div class="plans-grid">
                 <div class="plan-card"><h3>Grátis</h3><div class="plan-price">R$0</div><p>3 gerações para testar</p><button data-plan="free" class="btn-upgrade">Atual</button></div>
                 <div class="plan-card popular"><div class="plan-badge">🔥 Popular</div><h3>Básico</h3><div class="plan-price">R$19,90</div><p>50 anúncios/mês</p><button data-plan="basico" class="btn-upgrade primary">Upgrade</button></div>
@@ -580,12 +502,14 @@
 </footer>
 
 <script>
+    // ========== ESTADO GLOBAL ==========
     let currentUser = JSON.parse(localStorage.getItem('marketUser')) || null;
     let generationsCount = parseInt(localStorage.getItem('generationCount')) || 0;
     let userPlan = localStorage.getItem('userPlan') || 'free';
     let history = JSON.parse(localStorage.getItem('adHistory')) || [];
     let currentImageData = null;
 
+    // ========== FUNÇÕES AUXILIARES ==========
     function saveUserData() {
         if(currentUser) localStorage.setItem('marketUser', JSON.stringify(currentUser));
         localStorage.setItem('userPlan', userPlan);
@@ -619,108 +543,13 @@
         const msgDiv = document.getElementById('limitMessage');
         if(!canGenerate()) {
             msgDiv.style.display = 'block';
-            msgDiv.innerHTML = `⚠️ Limite atingido. Faça upgrade para continuar.`;
+            msgDiv.innerHTML = `⚠️ Limite atingido! Faça upgrade para continuar.`;
         } else {
             msgDiv.style.display = 'none';
         }
     }
 
-    // Função para gerar imagem do criativo usando Canvas
-    function generateCreativeImage(productImage, productName, price, marketplace, discount = "OFF") {
-        return new Promise((resolve) => {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            canvas.width = 800;
-            canvas.height = 800;
-            
-            // Fundo gradiente
-            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-            gradient.addColorStop(0, '#0A2647');
-            gradient.addColorStop(1, '#1a3a5c');
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Moldura decorativa
-            ctx.strokeStyle = '#FFB703';
-            ctx.lineWidth = 8;
-            ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
-            
-            // Selo de oferta
-            ctx.save();
-            ctx.shadowBlur = 10;
-            ctx.shadowColor = 'rgba(0,0,0,0.3)';
-            ctx.fillStyle = '#FFB703';
-            ctx.beginPath();
-            ctx.ellipse(canvas.width - 100, 100, 60, 60, 0, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.fillStyle = '#0A2647';
-            ctx.font = 'bold 20px "Inter"';
-            ctx.textAlign = 'center';
-            ctx.fillText(discount, canvas.width - 100, 95);
-            ctx.font = 'bold 14px "Inter"';
-            ctx.fillStyle = 'white';
-            ctx.fillText('DESCONTO', canvas.width - 100, 125);
-            ctx.restore();
-            
-            // Imagem do produto (se tiver)
-            if(productImage) {
-                const img = new Image();
-                img.onload = () => {
-                    const imgSize = 400;
-                    const x = (canvas.width - imgSize) / 2;
-                    const y = 150;
-                    ctx.save();
-                    ctx.shadowBlur = 15;
-                    ctx.shadowColor = 'rgba(0,0,0,0.5)';
-                    ctx.fillStyle = 'white';
-                    ctx.fillRect(x - 10, y - 10, imgSize + 20, imgSize + 20);
-                    ctx.drawImage(img, x, y, imgSize, imgSize);
-                    ctx.restore();
-                    
-                    // Título do produto
-                    ctx.fillStyle = 'white';
-                    ctx.font = 'bold 28px "Inter"';
-                    ctx.textAlign = 'center';
-                    ctx.fillText(productName.substring(0, 40), canvas.width/2, 620);
-                    
-                    // Preço
-                    ctx.fillStyle = '#FFB703';
-                    ctx.font = 'bold 42px "Inter"';
-                    ctx.fillText(price, canvas.width/2, 690);
-                    
-                    // Marketplace
-                    ctx.fillStyle = '#61a5c2';
-                    ctx.font = '18px "Inter"';
-                    ctx.fillText(`📦 Disponível na ${marketplace}`, canvas.width/2, 745);
-                    
-                    // Badge de frete grátis
-                    ctx.fillStyle = '#10b981';
-                    ctx.beginPath();
-                    ctx.rect(50, canvas.height - 70, 200, 40);
-                    ctx.fill();
-                    ctx.fillStyle = 'white';
-                    ctx.font = 'bold 14px "Inter"';
-                    ctx.fillText('🚚 Frete Grátis', 150, canvas.height - 42);
-                    
-                    resolve(canvas.toDataURL('image/png'));
-                };
-                img.src = productImage;
-            } else {
-                // Placeholder
-                ctx.fillStyle = '#2C7DA0';
-                ctx.fillRect(canvas.width/2 - 150, 150, 300, 300);
-                ctx.fillStyle = 'white';
-                ctx.font = '20px "Inter"';
-                ctx.fillText('📦 PRODUTO', canvas.width/2, 310);
-                ctx.fillText(productName.substring(0, 30), canvas.width/2, 600);
-                ctx.fillStyle = '#FFB703';
-                ctx.font = 'bold 42px "Inter"';
-                ctx.fillText(price, canvas.width/2, 680);
-                resolve(canvas.toDataURL('image/png'));
-            }
-        });
-    }
-
+    // ========== GERAR TEXTO DO ANÚNCIO ==========
     function generateAdTexts() {
         const name = document.getElementById('prodName').value || "Produto";
         const marketplace = document.getElementById('marketplace').value;
@@ -748,75 +577,71 @@
         return { title, description, bullets, cta, priceSuggestion };
     }
 
-    async function renderResult(productName, marketplaceUsed, imageBase64) {
-        const texts = generateAdTexts();
-        const container = document.getElementById('resultContainer');
-        container.style.display = 'block';
-        
-        container.innerHTML = `
-            <h3 style="margin-bottom:1rem;">🎨 Seu criativo está pronto!</h3>
-            <div class="creative-display">
-                <div>
-                    <div class="generated-image">
-                        <canvas id="creativeCanvas" width="400" height="400" style="width:100%; height:auto;"></canvas>
-                    </div>
-                    <div class="image-actions">
-                        <button id="downloadImageBtn" class="btn-download">📥 Baixar imagem do criativo</button>
-                    </div>
-                </div>
-                <div class="copy-texts">
-                    <div class="result-block"><strong>📌 Título:</strong> ${texts.title} <button class="copy-btn" data-clip="${texts.title}">Copiar</button></div>
-                    <div class="result-block"><strong>📝 Descrição:</strong><br>${texts.description.replace(/\n/g,'<br>')} <button class="copy-btn" data-clip="${texts.description}">Copiar</button></div>
-                    <div class="result-block"><strong>🔹 Bullet points:</strong><br>${texts.bullets.map(b=>`• ${b}`).join('<br>')} <button class="copy-btn" data-clip="${texts.bullets.join('\n')}">Copiar</button></div>
-                    <div class="result-block"><strong>🎯 CTA:</strong> ${texts.cta} <button class="copy-btn" data-clip="${texts.cta}">Copiar</button></div>
-                    <div class="result-block"><strong>💰 Preço sugerido:</strong> ${texts.priceSuggestion} <button class="copy-btn" data-clip="${texts.priceSuggestion}">Copiar</button></div>
-                </div>
-            </div>
-        `;
-        
-        // Renderizar a imagem do criativo no canvas
-        const canvas = document.createElement('canvas');
-        canvas.width = 800;
-        canvas.height = 800;
-        const ctx = canvas.getContext('2d');
-        const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-        gradient.addColorStop(0, '#0A2647');
-        gradient.addColorStop(1, '#1a3a5c');
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.strokeStyle = '#FFB703';
-        ctx.lineWidth = 8;
-        ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
-        ctx.fillStyle = '#FFB703';
-        ctx.beginPath();
-        ctx.ellipse(canvas.width - 100, 100, 60, 60, 0, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = '#0A2647';
-        ctx.font = 'bold 20px "Inter"';
-        ctx.textAlign = 'center';
-        ctx.fillText('OFF', canvas.width - 100, 95);
-        ctx.font = 'bold 14px "Inter"';
-        ctx.fillStyle = 'white';
-        ctx.fillText('DESCONTO', canvas.width - 100, 125);
-        
-        if(imageBase64) {
-            const img = new Image();
-            img.onload = () => {
-                const imgSize = 400;
-                const x = (canvas.width - imgSize) / 2;
-                const y = 150;
-                ctx.fillStyle = 'white';
-                ctx.fillRect(x - 10, y - 10, imgSize + 20, imgSize + 20);
-                ctx.drawImage(img, x, y, imgSize, imgSize);
+    // ========== GERAR IMAGEM DO CRIATIVO (CANVAS) ==========
+    async function generateCreativeImage(productImageDataURL, productName, priceSuggestion, marketplace) {
+        return new Promise((resolve) => {
+            const canvas = document.createElement('canvas');
+            canvas.width = 800;
+            canvas.height = 800;
+            const ctx = canvas.getContext('2d');
+            
+            // Fundo gradiente
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, '#0A2647');
+            gradient.addColorStop(1, '#1a3a5c');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Moldura
+            ctx.strokeStyle = '#FFB703';
+            ctx.lineWidth = 8;
+            ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
+            
+            // Selo de oferta
+            ctx.fillStyle = '#FFB703';
+            ctx.beginPath();
+            ctx.ellipse(canvas.width - 100, 100, 60, 60, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = '#0A2647';
+            ctx.font = 'bold 20px "Inter"';
+            ctx.textAlign = 'center';
+            ctx.fillText('OFF', canvas.width - 100, 95);
+            ctx.font = 'bold 14px "Inter"';
+            ctx.fillStyle = 'white';
+            ctx.fillText('DESCONTO', canvas.width - 100, 125);
+            
+            // Função para desenhar tudo após carregar a imagem
+            const drawContent = (img) => {
+                if(img) {
+                    const imgSize = 400;
+                    const x = (canvas.width - imgSize) / 2;
+                    const y = 150;
+                    ctx.fillStyle = 'white';
+                    ctx.fillRect(x - 10, y - 10, imgSize + 20, imgSize + 20);
+                    ctx.drawImage(img, x, y, imgSize, imgSize);
+                } else {
+                    // Placeholder se não tiver imagem
+                    ctx.fillStyle = '#2C7DA0';
+                    ctx.fillRect(canvas.width/2 - 150, 150, 300, 300);
+                    ctx.fillStyle = 'white';
+                    ctx.font = '20px "Inter"';
+                    ctx.fillText('📦 PRODUTO', canvas.width/2, 310);
+                }
+                
+                // Textos
                 ctx.fillStyle = 'white';
                 ctx.font = 'bold 28px "Inter"';
                 ctx.fillText(productName.substring(0, 40), canvas.width/2, 620);
+                
                 ctx.fillStyle = '#FFB703';
                 ctx.font = 'bold 42px "Inter"';
-                ctx.fillText(texts.priceSuggestion, canvas.width/2, 690);
+                ctx.fillText(priceSuggestion, canvas.width/2, 690);
+                
                 ctx.fillStyle = '#61a5c2';
                 ctx.font = '18px "Inter"';
-                ctx.fillText(`📦 Disponível na ${marketplaceUsed}`, canvas.width/2, 745);
+                ctx.fillText(`📦 Disponível na ${marketplace}`, canvas.width/2, 745);
+                
+                // Badge frete grátis
                 ctx.fillStyle = '#10b981';
                 ctx.beginPath();
                 ctx.rect(50, canvas.height - 70, 200, 40);
@@ -825,12 +650,187 @@
                 ctx.font = 'bold 14px "Inter"';
                 ctx.fillText('🚚 Frete Grátis', 150, canvas.height - 42);
                 
-                const finalCanvas = document.getElementById('creativeCanvas');
-                if(finalCanvas) {
-                    finalCanvas.width = 400;
-                    finalCanvas.height = 400;
-                    const finalCtx = finalCanvas.getContext('2d');
-                    finalCtx.drawImage(canvas, 0, 0, 400, 400);
-                    document.getElementById('downloadImageBtn').onclick = () => {
-                        const link = document.createElement('a');
-                        link.download = `criativo_${productName.substring(0,20)}.png`;
+                resolve(canvas.toDataURL('image/png'));
+            };
+            
+            if(productImageDataURL) {
+                const img = new Image();
+                img.onload = () => drawContent(img);
+                img.src = productImageDataURL;
+            } else {
+                drawContent(null);
+            }
+        });
+    }
+
+    // ========== RENDERIZAR RESULTADO COMPLETO ==========
+    async function renderResult(productName, marketplaceUsed, productImageDataURL) {
+        const texts = generateAdTexts();
+        
+        // Gerar a imagem do criativo
+        const creativeImageDataURL = await generateCreativeImage(
+            productImageDataURL, 
+            productName, 
+            texts.priceSuggestion, 
+            marketplaceUsed
+        );
+        
+        const container = document.getElementById('resultContainer');
+        container.style.display = 'block';
+        
+        container.innerHTML = `
+            <h3 style="margin-bottom:1rem;">🎨 Seu criativo está pronto!</h3>
+            <div class="creative-display">
+                <div>
+                    <div class="generated-image">
+                        <img id="creativeImage" src="${creativeImageDataURL}" style="width:100%; border-radius:1rem; box-shadow:0 20px 25px -5px rgba(0,0,0,0.1);">
+                    </div>
+                    <div class="image-actions">
+                        <button id="downloadImageBtn" class="btn-download">📥 Baixar imagem do criativo</button>
+                    </div>
+                </div>
+                <div class="copy-texts">
+                    <div class="result-block"><strong>📌 Título:</strong> ${texts.title} <button class="copy-btn" data-clip="${texts.title.replace(/"/g, '&quot;')}">Copiar</button></div>
+                    <div class="result-block"><strong>📝 Descrição:</strong><br>${texts.description.replace(/\n/g,'<br>')} <button class="copy-btn" data-clip="${texts.description.replace(/"/g, '&quot;')}">Copiar</button></div>
+                    <div class="result-block"><strong>🔹 Bullet points:</strong><br>${texts.bullets.map(b=>`• ${b}`).join('<br>')} <button class="copy-btn" data-clip="${texts.bullets.join('\n').replace(/"/g, '&quot;')}">Copiar</button></div>
+                    <div class="result-block"><strong>🎯 CTA:</strong> ${texts.cta} <button class="copy-btn" data-clip="${texts.cta.replace(/"/g, '&quot;')}">Copiar</button></div>
+                    <div class="result-block"><strong>💰 Preço sugerido:</strong> ${texts.priceSuggestion} <button class="copy-btn" data-clip="${texts.priceSuggestion}">Copiar</button></div>
+                </div>
+            </div>
+        `;
+        
+        // Evento de download da imagem
+        const downloadBtn = document.getElementById('downloadImageBtn');
+        if(downloadBtn) {
+            downloadBtn.onclick = () => {
+                const link = document.createElement('a');
+                link.download = `criativo_${productName.substring(0,20)}.png`;
+                link.href = creativeImageDataURL;
+                link.click();
+            };
+        }
+        
+        // Eventos de cópia
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const text = btn.getAttribute('data-clip');
+                navigator.clipboard.writeText(text);
+                btn.textContent = 'Copiado!';
+                setTimeout(() => { btn.textContent = 'Copiar'; }, 2000);
+            });
+        });
+        
+        // Salvar no histórico
+        const historyItem = {
+            product: productName,
+            marketplace: marketplaceUsed,
+            title: texts.title,
+            date: new Date().toLocaleString(),
+            imageDataURL: creativeImageDataURL
+        };
+        history.unshift(historyItem);
+        if(history.length > 20) history.pop();
+        localStorage.setItem('adHistory', JSON.stringify(history));
+        renderHistory();
+    }
+
+    // ========== HISTÓRICO ==========
+    function renderHistory() {
+        const historyDiv = document.getElementById('historyList');
+        if(!history.length) {
+            historyDiv.innerHTML = '<p style="color:gray;">Nenhum anúncio gerado</p>';
+            return;
+        }
+        historyDiv.innerHTML = history.map((item, idx) => `
+            <div class="history-item" data-index="${idx}">
+                <strong>${item.product}</strong> | ${item.marketplace}<br>
+                <small>${item.title.substring(0, 60)}...</small><br>
+                <span style="font-size:0.7rem;">📅 ${item.date}</span>
+            </div>
+        `).join('');
+        
+        // Adicionar evento para visualizar histórico
+        document.querySelectorAll('.history-item').forEach(el => {
+            el.addEventListener('click', (e) => {
+                const idx = parseInt(el.getAttribute('data-index'));
+                const item = history[idx];
+                if(item && item.imageDataURL) {
+                    const container = document.getElementById('resultContainer');
+                    container.style.display = 'block';
+                    container.innerHTML = `
+                        <h3>📋 Anúncio salvo: ${item.product}</h3>
+                        <div class="creative-display">
+                            <div><img src="${item.imageDataURL}" style="width:100%; border-radius:1rem;"></div>
+                            <div><p>Anúncio gerado em ${item.date}</p><button onclick="document.getElementById('resultContainer').style.display='none'" class="btn-outline">Fechar</button></div>
+                        </div>
+                    `;
+                }
+            });
+        });
+    }
+
+    // ========== EVENTOS PRINCIPAIS ==========
+    document.getElementById('clearHistoryBtn')?.addEventListener('click', () => {
+        history = [];
+        localStorage.setItem('adHistory', '[]');
+        renderHistory();
+        alert('🗑️ Histórico limpo!');
+    });
+
+    document.querySelectorAll('[data-plan]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            let plan = btn.getAttribute('data-plan');
+            if(plan === 'free') return alert('✅ Você já está no plano Grátis.');
+            if(plan === 'basico') { userPlan = 'basico'; alert('🚀 Upgrade para Básico (demonstração) - 50 anúncios/mês'); }
+            if(plan === 'pro') { userPlan = 'pro'; alert('💎 Upgrade para Pro (demonstração) - Anúncios ilimitados!'); }
+            localStorage.setItem('userPlan', userPlan);
+            if(currentUser) updateUIByAuth();
+            showLimitWarning();
+        });
+    });
+
+    document.getElementById('generateBtn')?.addEventListener('click', async () => {
+        if(!currentUser) { alert('🔐 Faça login primeiro!'); document.getElementById('showLoginBtn').click(); return; }
+        if(!canGenerate()) { alert(`⚠️ Limite excedido! Faça upgrade.`); return; }
+        
+        const prodName = document.getElementById('prodName').value;
+        if(!prodName) { alert('📝 Informe o nome do produto'); return; }
+        
+        // Pegar imagem para o criativo
+        const imageInput = document.getElementById('productImage');
+        let imageDataURL = null;
+        
+        if(imageInput.files && imageInput.files[0]) {
+            imageDataURL = await new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = (e) => resolve(e.target.result);
+                reader.readAsDataURL(imageInput.files[0]);
+            });
+        }
+        
+        await renderResult(prodName, document.getElementById('marketplace').value, imageDataURL);
+        
+        generationsCount++;
+        localStorage.setItem('generationCount', generationsCount);
+        showLimitWarning();
+        updateUIByAuth();
+    });
+
+    // Preview da imagem
+    document.getElementById('productImage')?.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if(file) {
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                const img = document.getElementById('imgPreview');
+                img.src = ev.target.result;
+                img.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // ========== LOGIN / LOGOUT ==========
+    const modal = document.getElementById('loginModal');
+    const openModal = () => { modal.style.display = 'flex'; };
+    const closeModal = () => {
