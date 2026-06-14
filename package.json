@@ -1,0 +1,11 @@
+{
+  "name": "marketcriativo-ia-v2",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "MicroSaaS para geração de anúncios e criativos para marketplaces com IA",
+  "scripts": {
+    "start": "vercel dev"
+  },
+  "dependencies": {}
+}
